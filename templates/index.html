@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        {% for user_on_page in user_res %}
+        <p><a href='/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></p>
+        <p>
+            {% for book in books_res %}
+                {% if book.user_id == user_on_page.id %}
+                    {{ book.book }}<br>
+                {% endif %}
+            {% endfor %}
+        </p>
+        {% endfor %}
+    </div>
+{% endblock %}
+

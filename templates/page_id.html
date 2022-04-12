@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <p>{{ user_res.name }}</p>
+        <p>
+           {% for book in books_res %}
+                {% if book.user_id == user_res.id %}
+                    {{ book.book }} {{ book.author }} <br>
+                    {{ book.about }}<br><br>
+                {% endif %}
+            {% endfor %}
+       </p>
+    </div>
+
+{% endblock %}

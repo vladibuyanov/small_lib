@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <h3>Login</h3>
+        <form method="post">
+            <input type="text" name="login_email" id="login_email" placeholder="e-mail"> <br> <br>
+            <input type="password" name="login_psw" id="login_psw" placeholder="Password"> <br> <br>
+            {% for msg in get_flashed_messages(True) %}
+                <div class="flash">{{ msg[1] }}</div> <br>
+            {% endfor %}
+            <button class="btn btn-outline-primary" type="submit">Login</button>
+            <label class="checkbox"><input type="checkbox">Remember me</label>
+        </form>
+    </div>
+{% endblock %}
