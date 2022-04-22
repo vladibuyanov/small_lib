@@ -7,12 +7,25 @@
           rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #E6F5E5;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .btn-primary {
+            background-color: #404A46;
+            border_color: white;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
-            <img src= "../static/img/logo.png" width="80" height="80">
+            <a href="/"><img src= "../static/img/logo.png" width="80" height="80"></a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 link-secondary">Small Lib</a></li>
               {% if current_user.is_authenticated %}
@@ -23,17 +36,20 @@
 
           {% if not current_user.is_authenticated %}
               <div class="col-md-3 text-end">
-                  <a href="/login">Login</a>
-                  <a href="/registration">Sign-up</a>
-                <!--<button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button> -->
+                <button type="button" class="btn btn-outline-primary me-2">
+                    <a href="/login">Login</a>
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <a href="/registration" style="color: white;">Sign-up</a>
+                </button>
               </div>
            {% endif %}
 
             {% if current_user.is_authenticated %}
               <div class="col-md-3 text-end">
-                  <a href="/logout">Logout</a>
-                  <!--<button type="button" class="btn btn-primary">Sign-up</button>-->
+                  <button type="button" class="btn btn-primary">
+                      <a href="/logout" style="color: white;">Logout</a>
+                  </button>
               </div>
            {% endif %}
         </header>

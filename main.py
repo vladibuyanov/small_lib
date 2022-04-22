@@ -46,20 +46,22 @@ def load_user(user_id):
 
 
 # Variables
-books_res = db.session.query(Books).all()
 user_res = db.session.query(User).all()
 # all_res = db.session.query(User, Books).join(Books, User.id == Books.user_id).all()
+# books_res = db.session.query(Books).all()
 
 
 # Main page
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    books_res = db.session.query(Books).all()
     return render_template('index.html', user_res=user_res, books_res=books_res)
 
 
 # Users dynamic page
 @app.route('/<int:page_id>')
 def user(page_id):
+    books_res = db.session.query(Books).all()
     return render_template('page_id.html', user_res=user_res[page_id - 1], books_res=books_res)
 
 
@@ -83,6 +85,55 @@ def add():
         return redirect(url_for('index'))
     else:
         return render_template('add.html')
+
+
+# Change book info
+@app.route('/change_book_info/<int:book_page_id>', methods=['GET', 'POST'])
+@login_required
+def change_book_info(book_page_id):
+    book_for_change = Books.query.filter_by(id=book_page_id).all()[0]
+    if request.method == 'POST':
+        book_for_change.book = request.form['book']
+        book_for_change.author = request.form['author']
+        book_for_change.about = request.form['about']
+        try:
+            db.session.commit()
+            return redirect(url_for('index'))
+        except:
+            db.session.rollback()
+            return redirect(url_for('index'))
+    return render_template('change_book_info.html', book_for_change=book_for_change)
+
+
+# Give book
+@app.route('/give_book/<int:book_page_id>', methods=['GET', 'POST'])
+@login_required
+def give_book(book_page_id):
+    book_for_give = Books.query.filter_by(id=book_page_id).all()[0]
+    if request.method == 'POST':
+        email_to_give = request.form['give_book_to_email']
+        book_for_give.user_id = User.query.filter_by(email=email_to_give).all()[0].id
+        try:
+            db.session.commit()
+            return redirect(url_for('index'))
+        except:
+            db.session.rollback()
+            return redirect(url_for('index'))
+    return render_template('give_book.html')
+
+
+# Delete book
+@app.route('/del/<int:book_page_id>')
+@login_required
+def delete_book(book_page_id):
+    book_for_delete = Books.query.filter_by(id=book_page_id).all()[0]
+    try:
+        db.session.delete(book_for_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        db.session.rollback()
+        return redirect(url_for('index'))
 
 
 # Registration page

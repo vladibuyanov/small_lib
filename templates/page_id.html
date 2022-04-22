@@ -2,15 +2,28 @@
 
 {% block content %}
     <div>
-        <p>{{ user_res.name }}</p>
         <p>
            {% for book in books_res %}
                 {% if book.user_id == user_res.id %}
-                    {{ book.book }} {{ book.author }} <br>
-                    {{ book.about }}<br><br>
+                    <ul>
+                        <li>{{ book.author }} {{ book.book }}<br>
+                        {{ book.about }}<br><br>
+                        {% if current_user.is_authenticated and current_user.id == user_res.id %}
+                            <div>
+                                <button class="btn btn-primary">
+                                    <a href="/give_book/{{ book.id }}" style="color: white">Give book</a>
+                                </button>
+                                <button class="btn btn-primary">
+                                    <a href="/change_book_info/{{ book.id }}" style="color: white">Change info</a>
+                                </button>
+                                <button class="btn btn-primary">
+                                    <a href="/del/{{ book.id }}" style="color: white">Delete</a>
+                                </button>
+                            </div> <br>
+                        {% endif %}
+                    </ul>
                 {% endif %}
             {% endfor %}
-       </p>
+        </p>
     </div>
-
 {% endblock %}

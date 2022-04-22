@@ -4,13 +4,13 @@
     <div>
         {% for user_on_page in user_res %}
         <p><a href='/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></p>
-        <p>
+            <ul>
             {% for book in books_res %}
                 {% if book.user_id == user_on_page.id %}
-                    {{ book.book }}<br>
+                    <li>{{ book.book }}
                 {% endif %}
             {% endfor %}
-        </p>
+            </ul>
         {% endfor %}
     </div>
 {% endblock %}
