@@ -2,20 +2,19 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 
-from admin.admin import admin
 
 # Configuration
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'd6c25d2b8081e4df4f6c'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///small-lib_2.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///small-lib.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-app.register_blueprint(admin, url_prefix='/admin')
-
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+
+# for blueprint
+# from admin.admin import admin
+# app.register_blueprint(admin, url_prefix='/admin')
 
 
 # database
@@ -35,6 +34,7 @@ class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book = db.Column(db.String(50), nullable=True)
     author = db.Column(db.String(20))
+    year_of_publication = db.Column(db.String(5))
     about = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -74,6 +74,7 @@ def add():
             book_from_page = Books(
                 book=request.form['book'],
                 author=request.form['author'],
+                year_of_publication=request.form['year_of_publication'],
                 about=request.form['about'],
                 user_id=current_user.id
             )
@@ -94,6 +95,7 @@ def change_book_info(book_page_id):
     book_for_change = Books.query.filter_by(id=book_page_id).all()[0]
     if request.method == 'POST':
         book_for_change.book = request.form['book']
+        book_for_change.year_of_publication = request.form['year_of_publication']
         book_for_change.author = request.form['author']
         book_for_change.about = request.form['about']
         try:

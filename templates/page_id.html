@@ -6,7 +6,7 @@
            {% for book in books_res %}
                 {% if book.user_id == user_res.id %}
                     <ul>
-                        <li>{{ book.author }} {{ book.book }}<br>
+                        <li>{{ book.author }} {{ book.book }} {{ book.year_of_publication }}<br>
                         {{ book.about }}<br><br>
                         {% if current_user.is_authenticated and current_user.id == user_res.id %}
                             <div>

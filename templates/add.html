@@ -4,9 +4,14 @@
    <div class="container">
         <h4>Add book</h4>
             <form method="post">
-                <input type="text" name="book" id="book" placeholder="Book"> <br><br>
-                <input type="text" name="author" id="author" placeholder="Author"> <br><br>
-                <input type="text" name="about" id="about" placeholder="About"> <br><br>
+                <input type="text" name="book" id="book"
+                       placeholder="Book"> <br><br>
+                <input type="text" name="author" id="author"
+                       placeholder="Author"> <br><br>
+                <input type="text" name="year_of_publication" id="year_of_publication"
+                       placeholder="Year of publication"> <br><br>
+                <input type="text" name="about" id="about"
+                       placeholder="About"> <br><br>
                 {% for msg in get_flashed_messages(True) %}
                     <div class="flash">{{ msg[1] }}</div> <br>
                 {% endfor %}

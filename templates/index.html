@@ -7,7 +7,7 @@
             <ul>
             {% for book in books_res %}
                 {% if book.user_id == user_on_page.id %}
-                    <li>{{ book.book }}
+                    <li>{{ book.book }} {{ book.year_of_publication }}
                 {% endif %}
             {% endfor %}
             </ul>
