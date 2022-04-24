@@ -1,1 +1,1 @@
-web: gunicorn run_s erver:server
+web: gunicorn app:app
