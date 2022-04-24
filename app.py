@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 
+from config import secret_key
 
 # Configuration
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'd6c25d2b8081e4df4f6c'
+app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///small-lib.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
