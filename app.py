@@ -2,7 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+
+# Not used
 # from flask_migrate import Migrate
+# migrate = Migrate(app, db)
+
+# blueprint
+# from flask import blueprint
+# from admin.admin import admin
+# app.register_blueprint(admin, url_prefix='/admin')
+
+# Variables
+# all_res = db.session.query(User, Books).join(Books, User.id == Books.user_id).all()
+# user_res = db.session.query(User).all()
+# books_res = db.session.query(Books).all()
 
 from config import secret_key
 
@@ -12,16 +25,15 @@ app.config['SECRET_KEY'] = secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///small-lib.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-# database
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
 
+# For login
 login_manager = LoginManager(app)
 
-# blueprint
-# from admin.admin import admin
-# app.register_blueprint(admin, url_prefix='/admin')
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 
 # database
@@ -48,32 +60,27 @@ class Books(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
-
-# Variables
-# all_res = db.session.query(User, Books).join(Books, User.id == Books.user_id).all()
-# user_res = db.session.query(User).all()
-# books_res = db.session.query(Books).all()
-
-
 # Main page
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    user_res = db.session.query(User).all()
+    # Take all users
+    all_users = db.session.query(User).all()
+    # Take all books
     books_res = db.session.query(Books).all()
-    return render_template('index.html', user_res=user_res, books_res=books_res)
+    return render_template('index.html', user_res=all_users, books_res=books_res)
 
 
 # Users dynamic page
 @app.route('/<int:page_id>')
 def user(page_id):
-    # list of users books
-    user_res = db.session.query(User).all()
-    user_books = Books.query.filter_by(owner=user_res[page_id - 1].id).all()
-    return render_template('page_id.html', user_res=user_res[page_id - 1], user_books=user_books, users=user_res)
+    # Take all user for dynamic page
+    all_user_dp = db.session.query(User).all()
+    # Books of user from page
+    user_books = Books.query.filter_by(owner=all_user_dp[page_id - 1].id).all()
+    return render_template('page_id.html',
+                           user_res=all_user_dp[page_id - 1],
+                           user_books=user_books,
+                           users=all_user_dp)
 
 
 # Add book page
@@ -104,6 +111,7 @@ def add():
 @app.route('/change_book_info/<int:book_page_id>', methods=['GET', 'POST'])
 @login_required
 def change_book_info(book_page_id):
+    # Search book for change info in Books
     book_for_change = Books.query.filter_by(id=book_page_id).all()[0]
     if request.method == 'POST':
         book_for_change.book = request.form['book']
@@ -123,8 +131,10 @@ def change_book_info(book_page_id):
 @app.route('/give_book/<int:book_page_id>', methods=['GET', 'POST'])
 @login_required
 def give_book(book_page_id):
+    # Search book for giving in Books
     book_for_give = Books.query.filter_by(id=book_page_id).all()[0]
     if request.method == 'POST':
+        # Give book to 'e-mail'
         email_to_give = request.form['give_book_to_email']
         book_for_give.user_id = User.query.filter_by(email=email_to_give).all()[0].id
         try:
@@ -140,6 +150,7 @@ def give_book(book_page_id):
 @app.route('/del/<int:book_page_id>')
 @login_required
 def delete_book(book_page_id):
+    # Search book for delete
     book_for_delete = Books.query.filter_by(id=book_page_id).all()[0]
     try:
         db.session.delete(book_for_delete)
@@ -154,20 +165,23 @@ def delete_book(book_page_id):
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
+        # 1-st and 2-nd input password the same
         if request.form['psw'] == request.form['psw_2']:
             name = request.form['name']
             email = request.form['email']
             psw = generate_password_hash(request.form['psw'], method='sha256')
             try:
-                new_user = User(name=name, email=email, psw=psw)
+                new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
                 db.session.add(new_user)
                 db.session.flush()
                 db.session.commit()
+            # Problem with add new user
             except Warning:
                 db.session.rollback()
                 flash("Something's  going wrong. Please, try again")
                 return render_template('registration.html')
             return redirect(url_for('index'))
+        # 1-st and 2-nd input password not same
         else:
             flash('Incorrect password. Please, try again')
             return render_template('registration.html')
@@ -182,15 +196,19 @@ def login():
         login_email = request.form['login_email']
         login_psw = request.form['login_psw']
         whose_login = User.query.filter_by(email=login_email).all()[0]
+        # User exist
         if whose_login:
+            # Correct password
             if check_password_hash(whose_login.psw, login_psw):
                 login_user(whose_login)
                 return redirect(url_for('index'))
+            # Incorrect password
             else:
                 flash('Incorrect password')
                 return render_template('login.html')
+        # User not exist
         else:
-            flash("User's not found")
+            flash("User not found")
             return render_template('login.html')
     else:
         return render_template('login.html')

@@ -5,10 +5,17 @@
 <div class="container">
         <h3>Registration</h3>
             <form method="post">
-                <input type="text" name="name" id="name" placeholder="Name"> <br> <br>
-                <input type="text" name="email" id="email" placeholder="e-mail"> <br> <br>
-                <input type="password" name="psw" id="psw" placeholder="Password"> <br> <br>
-                <input type="password" name="psw_2" id="psw_2" placeholder="Return password"> <br> <br>
+                <ul>
+                    <li style="padding-bottom: 1%;">
+                        <input type="text" name="name" id="name" placeholder="Name"></li>
+                    <li style="padding-bottom: 1%;">
+                        <input type="text" name="email" id="email" placeholder="e-mail"></li>
+                    <li style="padding-bottom: 1%;">
+                        <input type="password" name="psw" id="psw" placeholder="Password"></li>
+                    <li>
+                        <input type="password" name="psw_2" id="psw_2" placeholder="Return password">
+                    </li>
+                </ul>
                 {% for msg in get_flashed_messages(True) %}
                     <div class="flash">{{ msg[1] }}</div> <br>
                 {% endfor %}

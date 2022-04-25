@@ -1,53 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
-        <!-- Page Username -->
-        {% if current_user.id == user_res.id %}
-            <h3>My lib</h3>
+<div>
+    <!-- Page Username -->
+    {% if current_user.id == user_res.id %}
+    <h3>My lib</h3>
+    {% else %}
+    <h3>{{ user_res.name }}</h3>
+    {% endif %}
+    <!------------------>
+</div>
+<div>
+    <!-- Book -->
+    {% for book in user_books %}
+    <ul style="list-style: none;">
+        <li>{{ book.book }}</li>
+        <li>Author: {{ book.author }}</li>
+        <li>Year of publication: {{ book.year_of_publication }}</li>
+        <li>{{ book.about }}</li>
+        {% if book.owner == book.user_id %}
+        <li>Status: in home</li>
         {% else %}
-            <h3>{{ user_res.name }}</h3>
+        <li>Status: loan to {{ users[book.user_id - 1].name }}</li>
         {% endif %}
-        <!---->
+    </ul>
 
-        <!-- Book -->
-        {% for book in user_books %}
-            {% if book.owner == book.user_id %}
-                <p>
-                    {{ book.book }} <br>
-                    Author: {{ book.author }} <br>
-                    Year of publication: {{ book.year_of_publication }} <br>
-                    {{ book.about }} <br>
-                    Status: in home
-                </p>
-            {% else %}
-                <p>
-                    {{ book.book }} <br>
-                    Author: {{ book.author }} <br>
-                    Year of publication: {{ book.year_of_publication }} <br>
-                    {{ book.about }} <br>
-                    Status: loan to {{ users[book.user_id - 1].name }}
-                </p>
-            {% endif %}
-
-            <!-- Buttons -->
-            {% if current_user.is_authenticated and current_user.id == user_res.id %}
-            <p>
-                {% if book.owner == book.user_id %}
-                    <button class="btn btn-primary">
-                        <a href="/give_book/{{ book.id }}" style="color: white">Give book</a>
-                    </button>
-                {% endif %}
-                <button class="btn btn-primary">
-                    <a href="/change_book_info/{{ book.id }}" style="color: white">Change info</a>
-                </button>
-                <button class="btn btn-primary">
-                    <a href="/del/{{ book.id }}" style="color: white">Delete</a>
-                </button>
-            </p>
-            {% endif %}
-            <!---->
-        {% endfor %}
-        <!---->
-    </div>
+    <!-- Buttons -->
+    {% if current_user.is_authenticated and current_user.id == user_res.id %}
+    <p>
+        {% if book.owner == book.user_id %}
+        <button class="btn btn-primary">
+            <a href="/give_book/{{ book.id }}" style="color: white">Give book</a>
+        </button>
+        {% endif %}
+        <button class="btn btn-primary">
+            <a href="/change_book_info/{{ book.id }}" style="color: white">Change info</a>
+        </button>
+        <button class="btn btn-primary">
+            <a href="/del/{{ book.id }}" style="color: white">Delete</a>
+        </button>
+    </p>
+    {% endif %}
+    <!-------->
+    {% endfor %}
+    <!--------->
+</div>
 {% endblock %}
