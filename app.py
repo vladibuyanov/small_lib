@@ -71,14 +71,14 @@ def index():
 
 
 # Users dynamic page
-@app.route('/<int:page_id>')
-def user(page_id):
+@app.route('/user_page/<int:user_id>')
+def user(user_id):
     # Take all user for dynamic page
     all_user_dp = db.session.query(User).all()
     # All books of user from page
-    user_books = Books.query.filter_by(owner=all_user_dp[page_id - 1].id).all()
+    user_books = Books.query.filter_by(owner=all_user_dp[user_id - 1].id).all()
     return render_template('page_id.html',
-                           user_res=all_user_dp[page_id - 1],
+                           user_res=all_user_dp[user_id - 1],
                            user_books=user_books,
                            users=all_user_dp)
 
