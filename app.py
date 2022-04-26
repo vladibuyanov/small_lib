@@ -77,10 +77,17 @@ def user(user_id):
     all_user_dp = db.session.query(User).all()
     # All books of user from page
     user_books = Books.query.filter_by(owner=all_user_dp[user_id - 1].id).all()
-    return render_template('page_id.html',
+    return render_template('user_page.html',
                            user_res=all_user_dp[user_id - 1],
                            user_books=user_books,
                            users=all_user_dp)
+
+
+# User dynamic settings page
+@app.route('/user_settings/<int:user_id>')
+@login_required
+def user_settings(user_id):
+    return render_template('user_settings.html')
 
 
 # Add book page

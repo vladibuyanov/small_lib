@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
+<div>
         {% for user_on_page in user_res %}
         <p><a href='/user_page/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></p>
             <ul style="list-style: none;">
