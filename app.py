@@ -17,12 +17,12 @@ from flask_sqlalchemy import SQLAlchemy
 # user_res = db.session.query(User).all()
 # books_res = db.session.query(Books).all()
 
-from config import secret_key
+from config import *
 
 # Configuration
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///small-lib.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -75,7 +75,7 @@ def index():
 def user(page_id):
     # Take all user for dynamic page
     all_user_dp = db.session.query(User).all()
-    # Books of user from page
+    # All books of user from page
     user_books = Books.query.filter_by(owner=all_user_dp[page_id - 1].id).all()
     return render_template('page_id.html',
                            user_res=all_user_dp[page_id - 1],
@@ -112,7 +112,7 @@ def add():
 @login_required
 def change_book_info(book_page_id):
     # Search book for change info in Books
-    book_for_change = Books.query.filter_by(id=book_page_id).all()[0]
+    book_for_change = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
         book_for_change.book = request.form['book']
         book_for_change.year_of_publication = request.form['year_of_publication']
@@ -132,11 +132,12 @@ def change_book_info(book_page_id):
 @login_required
 def give_book(book_page_id):
     # Search book for giving in Books
-    book_for_give = Books.query.filter_by(id=book_page_id).all()[0]
+    book_for_give = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
-        # Give book to 'e-mail'
+        # Give book to 'user_to_give'
         email_to_give = request.form['give_book_to_email']
-        book_for_give.user_id = User.query.filter_by(email=email_to_give).all()[0].id
+        user_to_give = User.query.filter_by(email=email_to_give).first()
+        book_for_give.user_id = user_to_give.id
         try:
             db.session.commit()
             return redirect(url_for('index'))
@@ -151,7 +152,7 @@ def give_book(book_page_id):
 @login_required
 def delete_book(book_page_id):
     # Search book for delete
-    book_for_delete = Books.query.filter_by(id=book_page_id).all()[0]
+    book_for_delete = Books.query.filter_by(id=book_page_id).first()
     try:
         db.session.delete(book_for_delete)
         db.session.commit()
@@ -165,25 +166,32 @@ def delete_book(book_page_id):
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
-        # 1-st and 2-nd input password the same
-        if request.form['psw'] == request.form['psw_2']:
-            name = request.form['name']
-            email = request.form['email']
-            psw = generate_password_hash(request.form['psw'], method='sha256')
-            try:
-                new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
-                db.session.add(new_user)
-                db.session.flush()
-                db.session.commit()
-            # Problem with add new user
-            except Warning:
-                db.session.rollback()
-                flash("Something's  going wrong. Please, try again")
+        # User with this email not exist
+        name = request.form['name']
+        email = request.form['email']
+        is_exist = User.query.filter_by(email=email).first()
+        if not is_exist:
+            # 1-st and 2-nd input password the same
+            if request.form['psw'] == request.form['psw_2']:
+                psw = generate_password_hash(request.form['psw'], method='sha256')
+                try:
+                    new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
+                    db.session.add(new_user)
+                    db.session.flush()
+                    db.session.commit()
+                # Problem with add new user
+                except Warning:
+                    db.session.rollback()
+                    flash("Something's  going wrong. Please, try again")
+                    return render_template('registration.html')
+                return redirect(url_for('index'))
+            # 1-st and 2-nd input password not same
+            else:
+                flash('Incorrect password. Please, try again')
                 return render_template('registration.html')
-            return redirect(url_for('index'))
-        # 1-st and 2-nd input password not same
+        # User already exist
         else:
-            flash('Incorrect password. Please, try again')
+            flash('User with this email already exist')
             return render_template('registration.html')
     else:
         return render_template('registration.html')
@@ -194,10 +202,10 @@ def registration():
 def login():
     if request.method == 'POST':
         login_email = request.form['login_email']
-        login_psw = request.form['login_psw']
-        whose_login = User.query.filter_by(email=login_email).all()[0]
+        whose_login = User.query.filter_by(email=login_email).first()
         # User exist
         if whose_login:
+            login_psw = request.form['login_psw']
             # Correct password
             if check_password_hash(whose_login.psw, login_psw):
                 login_user(whose_login)
