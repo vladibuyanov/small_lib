@@ -4,27 +4,27 @@
 <div>
     <!-- Page Username -->
     {% if current_user.id == user_res.id %}
-    <h3>My lib</h3>
+    <h3 style="margin: 5% 0 4% 5%;">My lib</h3>
     {% else %}
     <h3>{{ user_res.name }}</h3>
     {% endif %}
     <!------------------>
 </div>
-<div>
+<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
     <!-- Book -->
     {% for book in user_books %}
     <div>
         <ul style="list-style: none;">
             <li>
-            <p>{{ book.book }}</p>
-            <p>Author: {{ book.author }}</p>
-            <p>Year of publication: {{ book.year_of_publication }}</p>
-            <p>{{ book.about }}</p>
-            {% if book.owner == book.user_id %}
-                <p>Status: in home</p>
-            {% else %}
+                <h4>{{ book.book }}</h4>
+                <p>Author: {{ book.author }}</p>
+                <p>Year of publication: {{ book.year_of_publication }}</p>
+                <p>{{ book.about }}</p>
+                {% if book.owner == book.user_id %}
+                    <p>Status: in home</p>
+                {% else %}
                 <p>Status: loan to {{ users[book.user_id - 1].name }}</p>
-            {% endif %}
+                {% endif %}
             </li>
         </ul>
         <!-- Buttons -->

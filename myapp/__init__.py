@@ -8,13 +8,13 @@ from .config import *
 from .routes.main import main
 from .routes.user_page import user_page
 from .routes.user_settings import user_settings
-from .routes.add_book import add_book
 from .routes.login import login
 from .routes.logout import logout
+from .routes.user_registration import user_registration
+from .routes.add_book import add_book
 from .routes.change_book_info import change_book_info
 from .routes.give_book import give_book
 from .routes.delete_book import delete_book
-from .routes.user_registration import user_registration
 
 # import models
 from .models.user import User
@@ -44,5 +44,6 @@ def create_app():
     app.register_blueprint(logout)
     app.register_blueprint(change_book_info)
     app.register_blueprint(delete_book)
+    app.register_blueprint(user_registration)
 
     return app

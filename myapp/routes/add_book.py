@@ -27,6 +27,6 @@ def book_add():
         except Warning:
             db.session.rollback()
             flash('Something is going wrong')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     else:
         return render_template('add.html')
