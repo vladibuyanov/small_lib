@@ -1,2 +1,3 @@
 /config.py
 /routes/admin_main.py
+/routes/user_settings
