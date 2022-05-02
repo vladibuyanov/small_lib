@@ -2,41 +2,43 @@
 
 
 {% block content %}
-<div class="py-5 text center">
+<div class="py-5 text center" style=" margin: 1% 8%;">
     <h4 class="mb-3">Registration</h4>
-            <form method="post">
-                <div class="col-sm-6">
-                  <label for="Name" class="form-label">Name</label>
-                  <input type="text" class="form-control" name="name" id="Name" value="" required="">
-                      <div class="invalid-feedback">
-                        Valid first name is required.
-                      </div>
+    <form method="post">
+        <div style="padding: 0 0 12px 0;">
+            <div class="col-sm-6">
+                <label for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="Name" placeholder="User name" value="" required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
                 </div>
-                <div class="col-sm-6">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address.
-                    </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address.
                 </div>
-                <div class="col-sm-6>
-                    <label for="psw" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="psw" id="psw">
-                    <div class="invalid-feedback">
-                        Please enter a valid password.
-                    </div>
+            </div>
+            <div class="col-sm-6>
+                <label for="psw" class="form-label">Password</form>
+                <input type="password" class="form-control" name="psw" id="psw" placeholder="Password">
+                <div class="invalid-feedback">
+                    Please enter a valid password.
                 </div>
-                <div class="col-12">
-                    <label for="psw_2" class="form-label">Return password</label>
-                    <input type="password" class="form-control" name="psw_2" id="psw_2">
-                    <div class="invalid-feedback">
-                        Please enter a valid return password.
-                    </div>
+            </div>
+            <div class="col-12">
+                <label for="psw_2" class="form-label">Return password</label>
+                <input type="password" class="form-control" name="psw_2" id="psw_2" placeholder="Password">
+                <div class="invalid-feedback">
+                    Please enter a valid return password.
                 </div>
-                {% for msg in get_flashed_messages(True) %}
-                    <div class="flash">{{ msg[1] }}</div> <br>
-                {% endfor %}
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Done</button>
-            </form>
-    </div>
+            </div>
+            {% for msg in get_flashed_messages(True) %}
+            <div class="flash">{{ msg[1] }}</div> <br>
+            {% endfor %}
+        </div>
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Done</button>
+    </form>
+</div>
 {% endblock %}

@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+<div class="users">
     {% for user_on_page in user_res %}
-    <p><h3><a href='/user_page/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3></p>
-    <ul style="list-style: none;">
-        {% for book in books_res %}
-        {% if book.user_id == user_on_page.id %}
-        <li>{{ book.book }}</li>
-        {% endif %}
-        {% endfor %}
-    </ul>
+        <div class="user-card">
+            <h3><a href='/user_page/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3>
+            <div class="user-books">
+                {% for book in books_res %}
+                    {% if book.user_id == user_on_page.id %}
+                        <p>{{ book.book }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     {% endfor %}
 </div>
 {% endblock %}

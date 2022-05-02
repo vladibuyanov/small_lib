@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+<div class="user-name-name">
     <!-- Page Username -->
     {% if current_user.id == user_res.id %}
     <h3 style="margin: 5% 0 4% 5%;">My lib</h3>
     {% else %}
     <h3>{{ user_res.name }}</h3>
     {% endif %}
-    <!------------------>
 </div>
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
+
+<div class="books">
     <!-- Book -->
     {% for book in user_books %}
-    <div>
-        <ul style="list-style: none;">
-            <li>
+    <div class="book">
+
+        <div class="book-card">
+            <!-- Card text -->
+            <div class="books-text">
                 <h4>{{ book.book }}</h4>
                 <p>Author: {{ book.author }}</p>
                 <p>Year of publication: {{ book.year_of_publication }}</p>
@@ -23,27 +25,52 @@
                 {% if book.owner == book.user_id %}
                     <p>Status: in home</p>
                 {% else %}
-                <p>Status: loan to {{ users[book.user_id - 1].name }}</p>
+                    <p>Status: loan to {{ users[book.user_id - 1].name }}</p>
                 {% endif %}
-            </li>
-        </ul>
-        <!-- Buttons -->
-        {% if current_user.is_authenticated and current_user.id == user_res.id %}
-        <p>
-            {% if book.owner == book.user_id %}
-            <button class="btn btn-primary">
-                <a href="/give_book/{{ book.id }}" style="color: white">Give book</a>
-            </button>
+            </div>
+
+            <!-- Buttons -->
+            <p class="book-buttons">
+            {% if current_user.is_authenticated and current_user.id == user_res.id %}
+                {% if book.owner == book.user_id %}
+                    <button class="btn btn-primary">
+                        <a href="/give_book/{{ book.id }}" style="color: white">Give</a>
+                    </button>
+                {% else %}
+                    <button class="btn btn-primary">
+                        <a href="/book_give_back/{{ book.id }}" style="color: white">Give back</a>
+                    </button>
+                {% endif %}
+                <button class="btn btn-primary">
+                    <a href="/change_book_info/{{ book.id }}" style="color: white">Change</a>
+                </button>
+                <button class="btn btn-primary">
+                    <a href="/del/{{ book.id }}" style="color: white">Delete</a>
+                </button>
             {% endif %}
-            <button class="btn btn-primary">
-                <a href="/change_book_info/{{ book.id }}" style="color: white">Change info</a>
-            </button>
-            <button class="btn btn-primary">
-                <a href="/del/{{ book.id }}" style="color: white">Delete</a>
-            </button>
-        </p>
-        {% endif %}
+            </p>
+
+        </div>
     </div>
     {% endfor %}
+</div>
+
+{% if current_user.id == user_res.id %}
+    <h3 style="margin: 5% 0 4% 5%;">Took to read</h3>
+{% endif %}
+
+<div style="display: flex; justify-content: space-around; align-items: start; flex-wrap: wrap; flex-direction: column; align-content: space-between;">
+    <div style="padding: 0 8px; border: 1px solid;">
+        {% for book in all_books %}
+            {% if current_user.id == book.user_id and current_user.id != book.owner %}
+                <h4>{{ book.book }}</h4>
+                <p>Author: {{ book.author }}</p>
+                <p>Year of publication: {{ book.year_of_publication }}</p>
+                <p>{{ book.about }}</p>
+            {% else %}
+
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

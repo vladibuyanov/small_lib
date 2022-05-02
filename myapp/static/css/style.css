@@ -9,3 +9,54 @@ a {
     background-color: #404A46;
     border_color: white;
 }
+.btn-outline-primary {
+    border-color: #404A46;
+}
+
+
+/* Main page */
+.users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.user-card {
+}
+.
+
+
+/* User page */
+.main{
+    margin: 3% 3%;
+}
+.user-name-name {
+    display: flex;
+    justify-content: start;
+}
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.book {
+    margin: 2% 2%;
+    border: 2px solid;
+    border-radius: 5% 5%;
+}
+
+.book-card {
+    margin: 5% 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.books-text {
+
+}
+
+.book-buttons {
+}
