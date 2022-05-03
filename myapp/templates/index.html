@@ -4,7 +4,7 @@
 <div class="users">
     {% for user_on_page in user_res %}
         <div class="user-card">
-            <h3><a href='/user_page/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3>
+            <h3><a href='/user/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3>
             <div class="user-books">
                 {% for book in books_res %}
                     {% if book.user_id == user_on_page.id %}

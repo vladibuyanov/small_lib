@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <div class="container">
+   <div class="add-book">
         <h4>Add book</h4>
             <form method="post">
-                <input type="text" name="book" id="book"
-                       placeholder="Book"> <br><br>
-                <input type="text" name="author" id="author"
-                       placeholder="Author"> <br><br>
-                <input type="text" name="year_of_publication" id="year_of_publication"
-                       placeholder="Year of publication"> <br><br>
-                <input type="text" name="about" id="about"
-                       placeholder="About"> <br><br>
+                <div class="add-book-input">
+                    <label for="book">Book</label>
+                    <input type="text" name="book" id="book">
+                </div>
+                <div class="add-book-input">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                </div>
+                <div class="add-book-input">
+                    <label for="year_of_publication">Year of publication</label>
+                    <input type="text" name="year_of_publication" id="year_of_publication">
+                </div>
+                <div class="add-book-input">
+                    <label for="about">About</label>
+                    <input type="text" name="about" id="about">
+                </div>
                 {% for msg in get_flashed_messages(True) %}
-                    <div class="flash">{{ msg[1] }}</div> <br>
+                    <div class="flash">{{ msg[1] }}
                 {% endfor %}
                 <button class="btn btn-primary" type="submit">Add</button>
             </form>

@@ -24,39 +24,59 @@ a {
 }
 .user-card {
 }
-.
-
 
 /* User page */
 .main{
     margin: 3% 3%;
 }
 .user-name-name {
+    margin: 0 12%;
     display: flex;
     justify-content: start;
 }
 .books {
+    margin: 0 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 .book {
+    width: 35%;
     margin: 2% 2%;
     border: 2px solid;
     border-radius: 5% 5%;
 }
-
 .book-card {
     margin: 5% 3%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-
 .books-text {
 
 }
-
 .book-buttons {
+    color: white;
+}
+
+/* Add book */
+.add-book {
+    margin: 0 8%;
+}
+.add-book-input {
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Change book */
+.change-book{
+    margin: 0 8%;
+}
+.change-book-input{
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

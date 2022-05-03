@@ -5,12 +5,11 @@ from ..extensions import db
 from ..models.user import User
 from ..models.books import Books
 
-user_page = Blueprint('user_page', __name__)
+user = Blueprint('user', __name__)
 
 
-# User dynamic page
-@user_page.route('/user_page/<int:user_id>')
-def user(user_id):
+@user.route('/user/<int:user_id>')
+def page(user_id):
     # Take all user for dynamic page
     all_user_dp = db.session.query(User).all()
     # All books of user from page
@@ -22,3 +21,9 @@ def user(user_id):
                            users=all_user_dp,
                            user_books=user_books,
                            all_books=all_books)
+
+
+@user.route('/user/user_settings/<int:user_id>')
+@login_required
+def settings(user_id):
+    return render_template('user_settings.html')

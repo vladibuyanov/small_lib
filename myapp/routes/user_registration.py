@@ -15,25 +15,33 @@ def registration():
         # User with this email not exist
         name = request.form['name']
         email = request.form['email']
+        psw = request.form['psw']
+        psw_2 = request.form['psw_2']
         is_exist = User.query.filter_by(email=email).first()
         if not is_exist:
-            # 1-st and 2-nd input password the same
-            if request.form['psw'] == request.form['psw_2']:
-                psw = generate_password_hash(request.form['psw'], method='sha256')
-                try:
-                    new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
-                    db.session.add(new_user)
-                    db.session.flush()
-                    db.session.commit()
-                # Problem with add new user
-                except Warning:
-                    db.session.rollback()
-                    flash("Something's  going wrong. Please, try again")
+            # Password not empty
+            if psw and psw_2:
+                # 1-st and 2-nd input password the same
+                if request.form['psw'] == request.form['psw_2']:
+                    psw = generate_password_hash(request.form['psw'], method='sha256')
+                    try:
+                        new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
+                        db.session.add(new_user)
+                        db.session.flush()
+                        db.session.commit()
+                    # Problem with add new user
+                    except Warning:
+                        db.session.rollback()
+                        flash("Something's  going wrong. Please, try again")
+                        return render_template('registration.html')
+                    return redirect(url_for('main.index'))
+                # 1-st and 2-nd input password not same
+                else:
+                    flash('Incorrect password. Please, try again')
                     return render_template('registration.html')
-                return redirect(url_for('main.index'))
-            # 1-st and 2-nd input password not same
+            # Password is empty
             else:
-                flash('Incorrect password. Please, try again')
+                flash('Empty password. Please, try again')
                 return render_template('registration.html')
         # User already exist
         else:

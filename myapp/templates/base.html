@@ -18,8 +18,8 @@
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
               {% if current_user.is_authenticated %}
-                <li><a href="/user_page/{{ current_user.id }}" class="nav-link px-2 link-dark">My page</a></li>
-                <li><a href="/add" class="nav-link px-2 link-dark">Add book</a></li>
+                <li><a href="/user/{{ current_user.id }}" class="nav-link px-2 link-dark">My page</a></li>
+                <li><a href="/book/add" class="nav-link px-2 link-dark">Add book</a></li>
               {% endif %}
             </ul>
 

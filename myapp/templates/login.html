@@ -9,30 +9,26 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <form method="post">
-<body class="text-center" id="login_main">
-  <main class="form-signin" style="height: 100%;
-    width: 80%;
-    margin: 1% 4% 5% 5%;
-    padding: 1% 4% 5% 5%;">
-      <img class="mb-4" src="../static/img/logo.png" alt="" width="200" height="200">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-      <div class="form-floating" style="margin-bottom: 2%;">
-        <input type="email" class="form-control" id="floatingInput" name="login_email" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-      </div>
-      <div class="form-floating" style="margin-bottom: 2%;">
-        <input type="password" class="form-control" id="floatingPassword" name="login_psw" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-      <!--<div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>-->
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
-  </main>
-</body>
+    <body class="text-center" id="login_main">
+      <main class="form-signin" style="margin: 10% 10%;">
+          <img class="mb-4" src="../static/img/logo.png" alt="" width="200" height="200">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <div class="form-floating" style="margin-bottom: 2%;">
+            <input type="email" class="form-control" id="floatingInput" name="login_email" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating" style="margin-bottom: 2%;">
+            <input type="password" class="form-control" id="floatingPassword" name="login_psw" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+          <!--<div class="checkbox mb-3">
+            <label><input type="checkbox" value="remember-me"> Remember me</label>
+          </div>-->
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+      </main>
+    </body>
 </form>
 </html>

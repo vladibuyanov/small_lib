@@ -11,20 +11,31 @@
 </head>
 
 <body>
+
+<header>
+    <h3>Admin panel</h3>
+    <button>Login</button>
+    <button>Logout</button>
+</header>
+
 <div class="users" style="margin: 10% 10%;">
     {% for user_on_page in user_res %}
         <div class="user-card">
             <div>
                 <h3><a href='/user_page/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3>
-                <button>Change</button>
-                <button>Delete</button>
+                <!--<button>Change</button>-->
+                <a href="/admin/delete_user/{{ user_on_page.id }}">
+                    <button>Delete</button>
+                </a>
             </div>
             <div class="user-books">
                 {% for book in books_res %}
                     {% if book.user_id == user_on_page.id %}
                         <p>{{ book.book }}</p>
-                        <button>Change</button>
-                        <button>Delete</button>
+                        <!--<button>Change</button>-->
+                        <a href="/admin/delete_book/{{ book.id }}">
+                            <button>Delete</button>
+                        </a>
                     {% endif %}
                 {% endfor %}
             </div>
