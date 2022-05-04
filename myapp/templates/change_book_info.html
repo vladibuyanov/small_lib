@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="change-book">
+<div class="for_book">
     <h4>Change book info</h4>
     <form method="post">
-        <div class="change-book-input">
+        <div class="input">
             <label for="book">Book</label>
-            <input type="text" name="book" id="book" placeholder="{{ book_for_change.book }}"></div>
-        <div class="change-book-input">
+            <input type="text" name="book" id="book" placeholder="{{ book_for_change.book }}">
+        </div>
+        <div class="input">
             <label for="author">Author</label>
             <input type="text" name="author" id="author" placeholder="{{ book_for_change.author }}">
         </div>
-        <div class="change-book-input">
+        <div class="input">
             <label for="year_of_publication">Year of publication</label>
             <input type="text" name="year_of_publication" id="year_of_publication"
                                                         placeholder="{{ book_for_change.year_of_publication }}">
         </div>
-        <div class="change-book-input">
+        <div class="input">
             <label for="about">About</label>
             <input type="text" name="about" id="about"
                                           placeholder="{{ book_for_change.about }}">

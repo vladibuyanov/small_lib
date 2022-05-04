@@ -23,10 +23,11 @@ def book_add():
             )
             db.session.add(book_from_page)
             db.session.commit()
+            return redirect(url_for('user.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
             flash('Something is going wrong')
-        return redirect(url_for('main.index'))
+            return render_template('add.html')
     else:
         return render_template('add.html')
 
@@ -42,10 +43,10 @@ def change_info(book_page_id):
         book_for_change.about = request.form['about']
         try:
             db.session.commit()
-            return redirect(url_for('main.index'))
+            return redirect(url_for('user.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
-            flash('!')
+            flash('Something going wrong')
             return render_template('change_book_info.html', book_for_change=book_for_change)
     return render_template('change_book_info.html', book_for_change=book_for_change)
 
@@ -61,10 +62,10 @@ def give(book_page_id):
         book_for_give.user_id = user_to_give.id
         try:
             db.session.commit()
-            return redirect(url_for('main.index'))
+            return redirect(url_for('user.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
-            flash('!')
+            flash('Something going wrong')
             return render_template('give_book.html')
     return render_template('give_book.html')
 
@@ -77,11 +78,12 @@ def give_back(book_page_id):
     book_for_give_back.user_id = current_user.id
     try:
         db.session.commit()
-        return redirect(url_for('main.index'))
+        flash('Ok')
+        return redirect(url_for('user.page', user_id=current_user.id))
     except Warning:
         db.session.rollback()
-        flash('!')
-        return render_template(url_for('main.index'))
+        flash('Something gong wrong')
+        return redirect(url_for('user.page', user_id=current_user.id))
 
 
 @book.route('/book/delete/<int:book_page_id>')
@@ -91,7 +93,7 @@ def delete_book(book_page_id):
     try:
         db.session.delete(book_for_delete)
         db.session.commit()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('user.page', user_id=current_user.id))
     except Warning:
         db.session.rollback()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('user.page', user_id=current_user.id))

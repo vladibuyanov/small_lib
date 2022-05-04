@@ -25,7 +25,7 @@ def registration():
                 if request.form['psw'] == request.form['psw_2']:
                     psw = generate_password_hash(request.form['psw'], method='sha256')
                     try:
-                        new_user = User(name=name, email=email, psw=psw)  # <- Don't know how do this right.
+                        new_user = User(name=name, email=email, psw=psw)  # Don't know how do this right.
                         db.session.add(new_user)
                         db.session.flush()
                         db.session.commit()
@@ -34,7 +34,7 @@ def registration():
                         db.session.rollback()
                         flash("Something's  going wrong. Please, try again")
                         return render_template('registration.html')
-                    return redirect(url_for('main.index'))
+                    return redirect(url_for('login.user_login'))
                 # 1-st and 2-nd input password not same
                 else:
                     flash('Incorrect password. Please, try again')

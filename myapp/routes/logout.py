@@ -1,10 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user, logout_user
-from werkzeug.security import check_password_hash
+from flask import Blueprint, redirect, url_for
+from flask_login import login_required, logout_user
 
-from ..extensions import db
-from ..models.user import User
-from ..models.books import Books
 
 logout = Blueprint('logout', __name__)
 

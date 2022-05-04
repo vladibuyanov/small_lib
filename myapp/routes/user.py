@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required
+from werkzeug.security import generate_password_hash
 
 from ..extensions import db
 from ..models.user import User
@@ -23,7 +24,22 @@ def page(user_id):
                            all_books=all_books)
 
 
-@user.route('/user/user_settings/<int:user_id>')
+@user.route('/user/user_settings/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def settings(user_id):
-    return render_template('user_settings.html')
+    user_settings = User.query.filter_by(id=user_id).first()
+    if request.method == "POST":
+        name = request.form['settings_name']
+        email = request.form['settings_email']
+        password = request.form['settings_password']
+        user_settings.name = name
+        user_settings.email = email
+        user_settings.password = generate_password_hash(password, method='sha256')
+        try:
+            db.session.commit()
+            return redirect(url_for('user.page', user_id=1))
+        except Warning:
+            db.session.rolback()
+            flash('Something going wrong')
+            return redirect(url_for('main.index'))
+    return render_template('user_settings.html', user_settings=user_settings)

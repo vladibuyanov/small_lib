@@ -25,6 +25,7 @@
 
             {% if current_user.is_authenticated %}
               <div class="col-md-3 text-end">
+                  <a href="/user/user_settings/{{ current_user.id }}">Settings</a>
                   <button type="button" class="btn btn-primary">
                       <a href="/logout" style="color: white;">Logout</a>
                   </button>

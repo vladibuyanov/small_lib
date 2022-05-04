@@ -2,4 +2,26 @@
 
 {% block content %}
 <h4>Settings</h4>
+<form method="post">
+    <div>
+        {% for msg in get_flashed_messages(True) %}
+            <div class="flash">{{ msg[1] }}</div> <br>
+        {% endfor %}
+        <div class="input">
+            <label for="name">Name</label>
+            <input type="text" name="settings_name" id="name" placeholder={{ user_settings.name }}>
+        </div>
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="email" name="settings_email" id="email" placeholder={{ user_settings.email }}>
+        </div>
+        <div class="input">
+            <label for="password">Password</label>
+            <input type="password" name="settings_password" id="password" placeholder="New password">
+        </div >
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+
 {% endblock %}
