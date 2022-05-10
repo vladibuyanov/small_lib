@@ -26,8 +26,8 @@ def create_app():
     app.config['SECRET_KEY'] = secret_key
     app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = track_modifications
-    app.config['DEBUG'] = debug
     app.config['FLASK_ADMIN_SWATCH'] = swath
+    app.config['DEBUG'] = debug
 
     db.init_app(app)
     migrate.init_app(app, db)
