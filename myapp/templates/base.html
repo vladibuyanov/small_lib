@@ -25,9 +25,11 @@
 
             {% if current_user.is_authenticated %}
               <div class="col-md-3 text-end">
-                  <a href="/user/user_settings/{{ current_user.id }}">Settings</a>
                   <button type="button" class="btn btn-primary">
-                      <a href="/logout" style="color: white;">Logout</a>
+                      <a href="/user/user_settings/{{ current_user.id }}" style="color: white;">Settings</a>
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                      <a href="/user_log/logout" style="color: white;">Logout</a>
                   </button>
               </div>
            {% endif %}
@@ -35,7 +37,7 @@
            {% if not current_user.is_authenticated %}
                <div class="col-md-3 text-end">
                   <button type="button" class="btn btn-outline-primary me-2">
-                      <a href="/login">Login</a>
+                      <a href="/user_log/login">Login</a>
                   </button>
                   <button type="button" class="btn btn-primary">
                     <a href="/registration" style="color: white;">Sign-up</a>

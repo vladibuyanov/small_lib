@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="users">
-    {% for user_on_page in user_res %}
+    {% for user in user_res %}
         <div class="user-card">
-            <h3><a href='/user/{{ user_on_page.id }}'>{{ user_on_page.name }}</a></h3>
+            <h4><a href='/user/{{ user.id }}'>{{ user.name }}</a></h4>
             <div class="user-books">
                 {% for book in books_res %}
-                    {% if book.user_id == user_on_page.id %}
+                    {% if book.user_id == user.id %}
                         <p>{{ book.book }}</p>
                     {% endif %}
                 {% endfor %}

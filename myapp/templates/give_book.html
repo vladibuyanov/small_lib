@@ -2,13 +2,18 @@
 
 {% block content %}
 <div class="container">
-    <h4>Give book too</h4>
+    <h4>Give book</h4>
     <form method="post">
-        <input type="text" name="give_book_to_email" id="give_book_to_email" placeholder="Enter email">
-        <button class="btn btn-outline-primary" type="submit">Give!</button>
-        {% for msg in get_flashed_messages(True) %}
-            <div class="flash">{{ msg[1] }}</div> <br>
-        {% endfor %}
+        <div>
+            <div class="input">
+                <label for="give_book_to_email">Email</label>
+                <input type="text" name="give_book_to_email" id="give_book_to_email" placeholder="Enter email">
+            </div>
+            <button class="btn btn-outline-primary" type="submit">Give!</button>
+            {% for msg in get_flashed_messages(True) %}
+                <div class="flash">{{ msg[1] }}</div> <br>
+            {% endfor %}
+        </div>
     </form>
 </div>
 {% endblock %}

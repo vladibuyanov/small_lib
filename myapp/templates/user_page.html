@@ -50,20 +50,17 @@
     {% endfor %}
 </div>
 
-{% if current_user.id == user_res.id %}
-    <h3 style="margin: 2% 12%;">Took to read</h3>
+
+{% if current_user.id == user_res.id and number_of_took_book > 0 %}
+    <div><h3 style="margin: 2% 12%;">Took to read</h3></div>
+    <div style="margin: 0 12%;">
+    {% for book in took_book %}
+        <h4>{{ book.book }}</h4>
+        <p>Author: {{ book.author }}</p>
+        <p>Year of publication: {{ book.year_of_publication }}</p>
+        <p>About: {{ book.about }}</p>
+    {% endfor %}
+    </div>
 {% endif %}
 
-<div>
-    <div>
-        {% for book in all_books %}
-            {% if current_user.id == book.user_id and current_user.id != book.owner %}
-                <h4>{{ book.book }}</h4>
-                <p>Author: {{ book.author }}</p>
-                <p>Year of publication: {{ book.year_of_publication }}</p>
-                <p>{{ book.about }}</p>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
 {% endblock %}

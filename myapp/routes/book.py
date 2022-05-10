@@ -12,18 +12,18 @@ book = Blueprint('book', __name__)
 @login_required
 def book_add():
     if request.method == 'POST':
+        book_from_page = Books(
+            book=request.form['book'],
+            author=request.form['author'],
+            year_of_publication=request.form['year_of_publication'],
+            about=request.form['about'],
+            owner=current_user.id,
+            user_id=current_user.id
+        )
         try:
-            book_from_page = Books(
-                book=request.form['book'],
-                author=request.form['author'],
-                year_of_publication=request.form['year_of_publication'],
-                about=request.form['about'],
-                owner=current_user.id,
-                user_id=current_user.id
-            )
             db.session.add(book_from_page)
             db.session.commit()
-            return redirect(url_for('user.page', user_id=current_user.id))
+            return redirect(url_for('users.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
             flash('Something is going wrong')
@@ -43,7 +43,7 @@ def change_info(book_page_id):
         book_for_change.about = request.form['about']
         try:
             db.session.commit()
-            return redirect(url_for('user.page', user_id=current_user.id))
+            return redirect(url_for('users.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
             flash('Something going wrong')
@@ -62,7 +62,7 @@ def give(book_page_id):
         book_for_give.user_id = user_to_give.id
         try:
             db.session.commit()
-            return redirect(url_for('user.page', user_id=current_user.id))
+            return redirect(url_for('users.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
             flash('Something going wrong')
@@ -79,11 +79,11 @@ def give_back(book_page_id):
     try:
         db.session.commit()
         flash('Ok')
-        return redirect(url_for('user.page', user_id=current_user.id))
+        return redirect(url_for('users.page', user_id=current_user.id))
     except Warning:
         db.session.rollback()
         flash('Something gong wrong')
-        return redirect(url_for('user.page', user_id=current_user.id))
+        return redirect(url_for('users.page', user_id=current_user.id))
 
 
 @book.route('/book/delete/<int:book_page_id>')
@@ -93,7 +93,7 @@ def delete_book(book_page_id):
     try:
         db.session.delete(book_for_delete)
         db.session.commit()
-        return redirect(url_for('user.page', user_id=current_user.id))
+        return redirect(url_for('users.page', user_id=current_user.id))
     except Warning:
         db.session.rollback()
-        return redirect(url_for('user.page', user_id=current_user.id))
+        return redirect(url_for('users.page', user_id=current_user.id))

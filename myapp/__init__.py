@@ -6,11 +6,9 @@ from .config import *
 
 # import routes
 from .routes.main import main
-from .routes.user import user
-from .routes.login import login
-from .routes.logout import logout
+from .routes.user import users
+from .routes.user_log import user_log
 from .routes.user_registration import user_registration
-from .routes.admin import admin
 from .routes.book import book
 
 # import models
@@ -26,21 +24,27 @@ def create_app():
     app.config['DEBUG'] = debug
 
     db.init_app(app)
-    migrate.init_app(app)
-    login_manager = LoginManager(app)
+    migrate.init_app(app, db)
+    login_manager = LoginManager(app, db)
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
 
+    app.config['FLASK_ADMIN_SWATCH'] = 'lux'
+    from .admin.admin_main import DashBoardView, MyModelView
+    from flask_admin import Admin
+    from flask_admin.contrib.sqla import ModelView
+
+    admin = Admin(app, name="Small Lib", template_mode='bootstrap4', endpoint='admin', index_view=DashBoardView())
+    admin.add_view(ModelView(User, db.session, name='Users'))
+    admin.add_view(MyModelView(Books, db.session, name='Books'))
+
     # Routes
-    app.register_blueprint(admin)
     app.register_blueprint(main)
-    app.register_blueprint(user)
-    app.register_blueprint(login)
-    app.register_blueprint(logout)
+    app.register_blueprint(users)
+    app.register_blueprint(user_log)
     app.register_blueprint(user_registration)
     app.register_blueprint(book)
-
 
     return app

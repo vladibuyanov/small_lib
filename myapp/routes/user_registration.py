@@ -1,10 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user, login_user
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 
 from ..extensions import db
 from ..models.user import User
-from ..models.books import Books
+
 
 user_registration = Blueprint('user_registration', __name__)
 
