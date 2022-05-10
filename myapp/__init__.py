@@ -1,8 +1,13 @@
 from flask import Flask
 from flask_login import LoginManager
+from .admin.admin_main import DashBoardView, MyModelView
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 from .extensions import db, migrate
 from .config import *
+
+
 
 # import routes
 from .routes.main import main
@@ -22,6 +27,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = track_modifications
     app.config['DEBUG'] = debug
+    app.config['FLASK_ADMIN_SWATCH'] = swath
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -31,11 +37,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(user_id)
 
-    app.config['FLASK_ADMIN_SWATCH'] = 'lux'
-    from .admin.admin_main import DashBoardView, MyModelView
-    from flask_admin import Admin
-    from flask_admin.contrib.sqla import ModelView
-
+    # Admin panel
     admin = Admin(app, name="Small Lib", template_mode='bootstrap4', endpoint='admin', index_view=DashBoardView())
     admin.add_view(ModelView(User, db.session, name='Users'))
     admin.add_view(MyModelView(Books, db.session, name='Books'))
