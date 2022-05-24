@@ -5,25 +5,20 @@ a {
     text-decoration: none;
     color: black;
 }
-.btn-primary {
+/* Buttons */
+.btn {
+    color: white;
     background-color: #404A46;
     border_color: white;
+}
+.a-buttons {
+    text-decoration: none;
+    color: white;
 }
 .btn-outline-primary {
     border-color: #404A46;
 }
 
-/* Inputs */
-.input{
-    margin: 2% 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-/* Books */
-.for_book {
-    margin: 0 8%;
-}
 
 /* Main page */
 .users {
@@ -34,11 +29,15 @@ a {
     flex-direction: row;
 }
 .user-card {
+    margin: 2% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
 /* User page */
 .main{
-    margin: 3% 3%;
+    margin: 2% 8%;
 }
 .user-name-name {
     margin: 0 12%;
@@ -46,13 +45,13 @@ a {
     justify-content: start;
 }
 .books {
-    margin: 0 10%;
+    margin: 2% 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 .book {
-    width: 35%;
+    width: 45%;
     margin: 2% 2%;
     border: 2px solid;
     border-radius: 5% 5%;
@@ -60,14 +59,20 @@ a {
 .book-card {
     margin: 5% 3%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 .books-text {
-}
-.book-buttons {
-    color: white;
+
 }
 
-/* Add book */
-/* Change book */
+/* Pages */
+.pages-main{
+    margin: 0 8%;
+}
+.input{
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

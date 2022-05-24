@@ -27,9 +27,9 @@ def book_add():
         except Warning:
             db.session.rollback()
             flash('Something is going wrong')
-            return render_template('add.html')
+            return render_template('book/add.html')
     else:
-        return render_template('add.html')
+        return render_template('book/add.html')
 
 
 @book.route('/book/change_info/<int:book_page_id>', methods=['GET', 'POST'])
@@ -47,8 +47,8 @@ def change_info(book_page_id):
         except Warning:
             db.session.rollback()
             flash('Something going wrong')
-            return render_template('change_book_info.html', book_for_change=book_for_change)
-    return render_template('change_book_info.html', book_for_change=book_for_change)
+            return render_template('book/change_info.html', book_for_change=book_for_change)
+    return render_template('book/change_info.html', book_for_change=book_for_change)
 
 
 @book.route('/book/give/<int:book_page_id>', methods=['GET', 'POST'])
@@ -66,8 +66,8 @@ def give(book_page_id):
         except Warning:
             db.session.rollback()
             flash('Something going wrong')
-            return render_template('give_book.html')
-    return render_template('give_book.html')
+            return render_template('book/give.html')
+    return render_template('book/give.html')
 
 
 @book.route('/book/give_back/<int:book_page_id>')

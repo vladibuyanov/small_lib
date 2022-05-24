@@ -22,7 +22,7 @@ def page(user_id):
         if book.user_id == user_id and user_id != book.owner:
             took_book.append(book)
 
-    return render_template('user_page.html',
+    return render_template('user/user_page.html',
                            user_res=all_user_dp[user_id - 1],
                            users=all_user_dp,
                            user_books=user_books,
@@ -36,9 +36,12 @@ def page(user_id):
 def settings(user_id):
     user_settings = User.query.filter_by(id=user_id).first()
     if request.method == "POST":
-        user_settings.name = request.form['settings_name']
-        user_settings.email = request.form['settings_email']
-        user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
+        if request.form['settings_name']:
+            user_settings.name = request.form['settings_name']
+        if request.form['settings_email']:
+            user_settings.email = request.form['settings_email']
+        if request.form['settings_password']:
+            user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
         try:
             db.session.commit()
             return redirect(url_for('users.page', user_id=1))
@@ -46,4 +49,4 @@ def settings(user_id):
             db.session.rolback()
             flash('Something going wrong')
             return redirect(url_for('main.index'))
-    return render_template('user_settings.html', user_settings=user_settings)
+    return render_template('user/user_settings.html', user_settings=user_settings)

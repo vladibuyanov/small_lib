@@ -6,10 +6,10 @@
     <form method="post">
         <div>
             <div class="input">
-                <label for="give_book_to_email">Email</label>
-                <input type="text" name="give_book_to_email" id="give_book_to_email" placeholder="Enter email">
+                <label for="give_book_to_email">Write email of you're friend</label>
+                <input type="text" required name="give_book_to_email" id="give_book_to_email" placeholder="Email">
             </div>
-            <button class="btn btn-outline-primary" type="submit">Give!</button>
+            <button class="btn" type="submit">Give!</button>
             {% for msg in get_flashed_messages(True) %}
                 <div class="flash">{{ msg[1] }}</div> <br>
             {% endfor %}

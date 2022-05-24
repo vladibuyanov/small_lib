@@ -1,22 +1,22 @@
 from flask import Flask
 from flask_login import LoginManager
-from .admin.admin_main import DashBoardView, MyModelView
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 from .extensions import db, migrate
 from .config import *
 
+# Import Admin views
+from .admin.admin_main import DashBoardView, MyModelView
 
-
-# import routes
+# Import routes
 from .routes.main import main
 from .routes.user import users
 from .routes.user_log import user_log
 from .routes.user_registration import user_registration
 from .routes.book import book
 
-# import models
+# Import models
 from .models.user import User
 from .models.books import Books
 
