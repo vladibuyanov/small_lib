@@ -1,4 +1,4 @@
-from ..extensions import db
+from extensions import db
 
 
 class Books(db.Model):
@@ -10,3 +10,6 @@ class Books(db.Model):
     owner = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f'{self.book}'

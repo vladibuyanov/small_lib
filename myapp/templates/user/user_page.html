@@ -3,7 +3,7 @@
 {% block content %}
 <div class="user-name-name">
     {% if current_user.id == user_res.id %}
-    <h3>My lib</h3>
+    <h3>My book's</h3>
     {% else %}
     <h3>{{ user_res.name }}</h3>
     {% endif %}
@@ -14,8 +14,7 @@
     <div class="book">
         <div class="book-card">
             <div class="books-text">
-                <h4>{{ book.book }}</h4>
-                <p>Author: {{ book.author }}</p>
+                <h4>{{ book.book }} ({{ book.author }})</h4>
                 <p>Year of publication: {{ book.year_of_publication }}</p>
                 <p>{{ book.about }}</p>
                 {% if book.owner == book.user_id %}

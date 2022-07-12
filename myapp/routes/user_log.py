@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import check_password_hash
 
-from ..models.user import User
+from models.user import User
 
 
 user_log = Blueprint('log', __name__)
 
 
 # Login page
-@user_log.route('/user_log/login', methods=['GET', 'POST'])
+@user_log.route('/login', methods=['GET', 'POST'])
 def user_login():
     if request.method == 'POST':
         login_email = request.form['login_email']
@@ -33,7 +33,7 @@ def user_login():
         return render_template('login.html')
 
 
-@user_log.route('/user_log/logout', methods=['GET', 'POST'])
+@user_log.route('/logout', methods=['GET', 'POST'])
 @login_required
 def user_logout():
     logout_user()

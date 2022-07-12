@@ -1,10 +1,9 @@
-body {
-    background-color: #E6F5E5;
-}
+
 a {
     text-decoration: none;
     color: black;
 }
+
 /* Buttons */
 .btn {
     color: white;
@@ -19,14 +18,20 @@ a {
     border-color: #404A46;
 }
 
-
+body {
+    background-color: #E6F5E5;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 /* Main page */
 .users {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-direction: row;
+    align-items: stretch;
+    flex-direction: column;
 }
 .user-card {
     margin: 2% 5%;
@@ -34,30 +39,30 @@ a {
     flex-direction: column;
     align-items: start;
 }
+.user-books{
+    margin: 2% 0;
+}
 
 /* User page */
 .main{
     margin: 2% 8%;
 }
 .user-name-name {
-    margin: 0 12%;
+    margin: 0 8%;
     display: flex;
     justify-content: start;
 }
 .books {
-    margin: 2% 10%;
+    margin: 2% 5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
 }
-.book {
-    width: 45%;
-    margin: 2% 2%;
-    border: 2px solid;
-    border-radius: 5% 5%;
-}
+.book {}
 .book-card {
-    margin: 5% 3%;
+    margin: 3% 3%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -74,5 +79,4 @@ a {
     margin: 2% 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }

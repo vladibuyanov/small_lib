@@ -13,26 +13,19 @@
 <body>
 <header>
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-between mb-4 border-bottom">
+    <header class="header">
             <a href="/"><img src= "../static/img/logo.png" width="200" height="200" alt="Small Lib"></a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
               {% if current_user.is_authenticated %}
-                <li><a href="/user/{{ current_user.id }}" class="nav-link px-2 link-dark">My page</a></li>
+                <li>
+                    <a href="/user/{{ current_user.id }}" class="nav-link px-2 link-dark">
+                        <h5>My lib</h5>
+                    </a>
+                </li>
               {% endif %}
             </ul>
 
             {% if current_user.is_authenticated %}
-                <!--<div class="text-end">
-                    <button type="button" class="btn">
-                        <a href="/add_book" style="color: white;">Add book</a>
-                    </button>
-                    <button type="button" class="btn">
-                        <a href="/user/user_settings/{{ current_user.id }}" style="color: white;">Settings</a>
-                    </button>
-                    <button type="button" class="btn">
-                        <a href="/logout" style="color: white;">Logout</a>
-                    </button>
-                </div>-->
                 <div class="dropdown">
                   <button class="btn dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Menu

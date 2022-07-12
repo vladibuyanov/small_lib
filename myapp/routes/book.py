@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 
-from ..extensions import db
-from ..models.user import User
-from ..models.books import Books
+from extensions import db
+from models.user import User
+from models.books import Books
 
 book = Blueprint('book', __name__)
 
@@ -37,10 +37,14 @@ def book_add():
 def change_info(book_page_id):
     book_for_change = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
-        book_for_change.book = request.form['book']
-        book_for_change.year_of_publication = request.form['year_of_publication']
-        book_for_change.author = request.form['author']
-        book_for_change.about = request.form['about']
+        if request.form['book']:
+            book_for_change.book = request.form['book']
+        if request.form['year_of_publication']:
+            book_for_change.year_of_publication = request.form['year_of_publication']
+        if request.form['author']:
+            book_for_change.author = request.form['author']
+        if request.form['about']:
+            book_for_change.about = request.form['about']
         try:
             db.session.commit()
             return redirect(url_for('users.page', user_id=current_user.id))

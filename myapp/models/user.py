@@ -1,4 +1,4 @@
-from ..extensions import db
+from extensions import db
 from flask_login import UserMixin
 
 
@@ -11,4 +11,4 @@ class User(UserMixin, db.Model):
     bk = db.relationship('Books', backref='users', uselist=False)
 
     def __repr__(self):
-        return self.email
+        return f'{self.email}'

@@ -3,32 +3,27 @@ from flask_login import LoginManager
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-from .extensions import db, migrate
-from .config import *
-
 # Import Admin views
-from .admin.admin_main import DashBoardView, MyModelView
+from admin.admin_main import DashBoardView, MyModelView
 
-# Import routes
-from .routes.main import main
-from .routes.user import users
-from .routes.user_log import user_log
-from .routes.user_registration import user_registration
-from .routes.book import book
+# Import database
+from extensions import db, migrate
 
 # Import models
-from .models.user import User
-from .models.books import Books
+from models.user import User
+from models.books import Books
+
+# Import routes
+from routes.main import main
+from routes.user import users
+from routes.user_log import user_log
+from routes.user_registration import user_registration
+from routes.book import book
 
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = secret_key
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = track_modifications
-    app.config['FLASK_ADMIN_SWATCH'] = swath
-    app.config['DEBUG'] = debug
-
+    app.config.from_pyfile('config.py')
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager = LoginManager(app, db)
@@ -50,3 +45,7 @@ def create_app():
     app.register_blueprint(book)
 
     return app
+
+
+if __name__ == "__main__":
+    create_app().run()

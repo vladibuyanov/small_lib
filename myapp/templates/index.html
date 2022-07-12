@@ -10,7 +10,7 @@
             <div class="user-books">
                 {% for book in books_res %}
                     {% if book.user_id == user.id %}
-                        <p>{{ book.book }}</p>
+                        <p>{{ book.book }} ({{book.author}})</p>
                     {% endif %}
                 {% endfor %}
             </div>
