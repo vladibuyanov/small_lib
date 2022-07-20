@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash
 
 from extensions import db
@@ -34,19 +34,36 @@ def page(user_id):
 @users.route('/user/user_settings/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def settings(user_id):
-    user_settings = User.query.filter_by(id=user_id).first()
-    if request.method == "POST":
-        if request.form['settings_name']:
-            user_settings.name = request.form['settings_name']
-        if request.form['settings_email']:
-            user_settings.email = request.form['settings_email']
-        if request.form['settings_password']:
-            user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
-        try:
-            db.session.commit()
-            return redirect(url_for('users.page', user_id=1))
-        except Warning:
-            db.session.rolback()
-            flash('Something going wrong')
-            return redirect(url_for('main.index'))
-    return render_template('user/user_settings.html', user_settings=user_settings)
+    if current_user.id == user_id:
+        user_settings = User.query.filter_by(id=user_id).first()
+        if request.method == "POST":
+            if request.form['settings_name']:
+                user_settings.name = request.form['settings_name']
+            if request.form['settings_email']:
+                user_settings.email = request.form['settings_email']
+            if request.form['settings_password']:
+                user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
+            try:
+                db.session.commit()
+                return redirect(url_for('users.page', user_id=1))
+            except Warning:
+                db.session.rolback()
+                flash('Something going wrong')
+                return redirect(url_for('main.index'))
+        return render_template('user/user_settings.html', user_settings=user_settings)
+    else:
+        return redirect(url_for('main.index'))
+
+
+@users.route('/user/user_settings/delete/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def delete(user_id):
+    logout_user()
+    delete_user = User.query.filter_by(id=user_id).first()
+    try:
+        db.session.delete(delete_user)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    except Warning:
+        db.session.rollback()
+        return redirect(url_for('main.index'))

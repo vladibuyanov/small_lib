@@ -4,7 +4,7 @@
 <div class="pages-main">
     <h4>Settings</h4>
     <form method="post">
-        <div>
+
             <div class="input">
                 <label for="name">Change name</label>
                 <input type="text" name="settings_name" id="name" placeholder={{ user_settings.name }}>
@@ -21,7 +21,10 @@
                 <div class="flash">{{ msg[1] }}</div> <br>
             {% endfor %}
             <button type="submit" class="btn">Submit</button>
-        </div>
+            <button type="submit" class="btn">
+                <a href="/user/user_settings/delete/{{ current_user.id }}" style="color: white">Delete account</a>
+            </button>
+
     </form>
 </div>
 

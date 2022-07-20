@@ -33,15 +33,15 @@
                   <ul class="dropdown-menu" aria-labelledby="dropdown">
                     <li><a class="dropdown-item" href="/book/add">Add book</a></li>
                     <li><a class="dropdown-item" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
-                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    <li><a class="dropdown-item" href="/logout" id="logout_btn">Logout</a></li>
                   </ul>
                 </div>
            {% endif %}
 
            {% if not current_user.is_authenticated %}
                <div class="col-md-3 text-end">
-                  <button type="button" class="btn">
-                      <a href="/login" style="color: white;">Login</a>
+                  <button type="button" class="btn" id="login_button">
+                      <a href="/login" style="color: white;" >Login</a>
                   </button>
                   <button type="button" class="btn">
                       <a href="/registration" style="color: white;">Sign-up</a>
