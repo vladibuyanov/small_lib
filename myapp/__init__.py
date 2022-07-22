@@ -4,7 +4,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 # Import Admin views
-from admin.admin_main import DashBoardView, MyModelView
+from admin.main import DashBoardView, MyModelView
 
 # Import database
 from extensions import db, migrate

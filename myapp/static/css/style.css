@@ -17,6 +17,7 @@ a {
     border-color: #404A46;
 }
 
+/* Tags */
 body {
     background-color: #E6F5E5;
 }
@@ -25,7 +26,10 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    border-bottom: solid 2px;
+    /* border-color: black; */
 }
+
 /* Main page */
 .users {
     display: flex;
@@ -44,7 +48,7 @@ body {
 
 /* User page */
 .main{
-    margin: 2% 8%;
+    margin: 3% 8%;
 }
 .user-name-name {
     margin: 0 8%;
@@ -66,9 +70,7 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
 }
-.books-text {
-
-}
+.books-text {}
 
 /* Pages */
 .pages-main{

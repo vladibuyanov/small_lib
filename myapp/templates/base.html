@@ -11,46 +11,45 @@
 </head>
 
 <body>
-<header>
-    <div class="container">
+<div class="container">
     <header class="header">
-            <a href="/"><img src= "../static/img/logo.png" width="200" height="200" alt="Small Lib"></a>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              {% if current_user.is_authenticated %}
-                <li>
-                    <a href="/user/{{ current_user.id }}" class="nav-link px-2 link-dark">
-                        <h5>My lib</h5>
-                    </a>
-                </li>
-              {% endif %}
-            </ul>
-
+        <a href="/"><img src= {{ url_for('static', filename='img/logo.png') }} width="200" height="200" alt="Small Lib"></a>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             {% if current_user.is_authenticated %}
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdown">
-                    <li><a class="dropdown-item" href="/book/add">Add book</a></li>
-                    <li><a class="dropdown-item" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
-                    <li><a class="dropdown-item" href="/logout" id="logout_btn">Logout</a></li>
-                  </ul>
-                </div>
-           {% endif %}
+            <li>
+                <a href="/user/{{ current_user.id }}" class="nav-link px-2 link-dark">
+                    <h5>My lib</h5>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
 
-           {% if not current_user.is_authenticated %}
-               <div class="col-md-3 text-end">
-                  <button type="button" class="btn" id="login_button">
-                      <a href="/login" style="color: white;" >Login</a>
-                  </button>
-                  <button type="button" class="btn">
-                      <a href="/registration" style="color: white;">Sign-up</a>
-                  </button>
-               </div>
-           {% endif %}
-        </header>
-    </div>
-</header>
+        {% if current_user.is_authenticated %}
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                <li><a class="dropdown-item" href="/book/add">Add book</a></li>
+                <li><a class="dropdown-item" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
+                <li><a class="dropdown-item" href="/logout" id="logout_btn">Logout</a></li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if not current_user.is_authenticated %}
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn" id="login_button">
+                <a href="/login" style="color: white;" >Login</a>
+            </button>
+            <button type="button" class="btn">
+                <a href="/registration" style="color: white;">Sign-up</a>
+            </button>
+        </div>
+        {% endif %}
+    </header>
+</div>
+
 
 <div class="main">
     {% block content %}{% endblock %}
