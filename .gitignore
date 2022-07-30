@@ -1,3 +1,9 @@
 /.idea
 /venv
+
 /myapp/config.py
+
+/myapp/tests/end-2-end/.pytest_cache/
+/myapp/tests/end-2-end/conftest.py
+/myapp/tests/end-2-end/tests/
+/myapp/tests/
