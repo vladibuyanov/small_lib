@@ -16,6 +16,9 @@ a {
 .btn-outline-primary {
     border-color: #404A46;
 }
+.btn-primary {
+    border-color: #404A46;
+}
 
 /* Tags */
 body {
@@ -80,4 +83,24 @@ body {
     margin: 2% 0;
     display: flex;
     flex-direction: column;
+}
+
+/* Registration page */
+.registration {
+    margin: 10% 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.user-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+/* Errors */
+.flash {
+    margin: 3% 2% 1% 2%;
+    display: flex;
+    justify-content: center;
 }
