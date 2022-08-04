@@ -1,11 +1,15 @@
+# Project
 /.idea
 /venv
 
-/myapp/config.py
-
+# Tests
+/myapp/tests/
 /myapp/tests/end-2-end/.pytest_cache/
 /myapp/tests/end-2-end/conftest.py
 /myapp/tests/end-2-end/tests/
-/myapp/tests/
-/TODO.py
+
+# Forms
 /myapp/forms/book_forms.py
+
+# Other
+/TODO.py
