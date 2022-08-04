@@ -8,3 +8,4 @@ Werkzeug==2.1.2
 selenium~=4.3.0
 pytest~=7.1.2
 WTForms~=3.0.1
+email-validator~=1.2.1
