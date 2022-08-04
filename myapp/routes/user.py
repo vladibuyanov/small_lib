@@ -2,9 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash
 
-from extensions import db
-from models.user import User
-from models.books import Books
+from myapp import Books, db, User
 
 users = Blueprint('users', __name__)
 
@@ -45,7 +43,7 @@ def settings(user_id):
                 user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
             try:
                 db.session.commit()
-                return redirect(url_for('users.page', user_id=1))
+                return redirect(url_for('users.page', user_id=user_id))
             except Warning:
                 db.session.rolback()
                 flash('Something going wrong')

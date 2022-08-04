@@ -1,4 +1,4 @@
-from extensions import db
+from myapp import db
 
 
 class Books(db.Model):

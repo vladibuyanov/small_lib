@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import check_password_hash
 
-from models.user import User
-from forms.user_forms import LoginFrom
+from myapp.models.user import User
+from myapp.forms.user_forms import LoginFrom
 
 
 user_log = Blueprint('log', __name__)

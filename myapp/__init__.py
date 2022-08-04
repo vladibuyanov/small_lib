@@ -3,22 +3,23 @@ from flask_login import LoginManager
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-# Import Admin views
-from admin.main import DashBoardView, MyModelView
 
 # Import database
-from extensions import db, migrate
+from myapp.extensions import db, migrate
 
 # Import models
-from models.user import User
-from models.books import Books
+from myapp.models.books import Books
+from myapp.models.user import User
+
+# Import Admin views
+from .admin.main import DashBoardView, MyModelView
 
 # Import routes
-from routes.main import main
-from routes.user import users
-from routes.user_log import user_log
-from routes.user_registration import user_registration
-from routes.book import book
+from .routes.main import main
+from .routes.user import users
+from .routes.user_log import user_log
+from .routes.user_registration import user_registration
+from .routes.book import book
 
 
 def create_app():

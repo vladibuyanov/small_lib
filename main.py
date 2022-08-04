@@ -1,7 +1,13 @@
 from myapp import create_app
 
-start_message = 'App was started'
-print(start_message)
+
+def start_app(app):
+    host = '0.0.0.0'
+    port = 8000
+    start_message = 'App was started'
+    print(start_message)
+    app.run(host=host, port=port)
+
 
 if __name__ == "__main__":
-    create_app().run()
+    start_app(create_app())
