@@ -6,7 +6,7 @@ def start_app(app):
     port = 8000
     start_message = 'App was started'
     print(start_message)
-    app.run(host=host, port=port)
+    app.run()
 
 
 if __name__ == "__main__":
