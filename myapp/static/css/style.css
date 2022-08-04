@@ -34,16 +34,24 @@ body {
 }
 
 /* Main page */
+.sections {
+    margin: 2% 0%;
+}
+.section {
+    margin: 2% 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.main_text {
+    margin: 0% 0%
+}
 .users {
     display: flex;
     align-items: stretch;
     flex-direction: column;
 }
 .user-card {
-    margin: 2% 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
 }
 .user-books{
     margin: 2% 0;

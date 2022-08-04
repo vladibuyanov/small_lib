@@ -2,20 +2,50 @@
 
 {% block content %}
 <div class="users">
-    {% for user in user_res %}
-        <div class="user-card">
-            <div>
-                <h3><a href='/user/{{ user.id }}'>{{ user.name }}</a></h3>
-            </div>
-            <div class="user-books">
-                {% for book in books_res %}
-                    {% if book.user_id == user.id %}
-                        <p>{{ book.book }} ({{book.author}})</p>
-                    {% endif %}
+    <div>
+        <h3>Small Lib</h3>
+        <p class="main_text">
+            We are sure that many of us like to feel the book in our hands.
+            No matter how they say, an e-book cannot be compared with a regular book.
+        </p>
+        <p class="main_text">
+            This is a web service that allows you to share books with other users.
+            Exchange, find those books that will be of interest to you.
+        </p>
+    </div>
+
+    <div class="sections">
+        <h4>Sections</h4>
+        <div class="section">
+            <div class="user-card">
+                <h4>Users</h4>
+                {% for user in user_res %}
+                <p><a href='/user/{{ user.id }}'>{{ user.name }}</a></p>
+                <!--            <div class="user-books">-->
+                <!--                {% for book in books_res %}-->
+                <!--                {% if book.user_id == user.id %}-->
+                <!--                <p>{{ book.book }} ({{book.author}})</p>-->
+                <!--                {% endif %}-->
+                <!--                {% endfor %}-->
+                <!--            </div>-->
                 {% endfor %}
+                <button class="btn">See all users</button>
+            </div>
+            <div>
+                <h4>Books</h4>
+                {% for book in books_res %}
+                <p>{{ book.book }}<p>
+                {% endfor %}
+                <button class="btn">See all books</button>
+            </div>
+            <div>
+                <h4>Genre</h4>
+                <p> Сlassical literature </p>
+                <p> Historical novel </p>
+                <p> Romantic literature</p>
+                <button class="btn">See all genres</button>
             </div>
         </div>
-    {% endfor %}
+    </div>
 </div>
 {% endblock %}
-
