@@ -9,16 +9,16 @@ main = Blueprint('main', __name__)
 def index():
     users = db.session.query(User).all()[:3]
     books = db.session.query(Books).all()[:3]
-    return render_template('index.html', user_res=users, books_res=books)
+    return render_template('main/index.html', user_res=users, books_res=books)
 
 
-# @main.route('/users', methods=['GET', 'POST'])
-# def index_users():
-#     users = db.session.query(User).all()
-#     return render_template('index.html', user_res=users)
-#
-#
-# @main.route('/books', methods=['GET', 'POST'])
-# def index_books():
-#     books_res = db.session.query(Books).all()
-#     return render_template('index.html', books_res=books_res)
+@main.route('/users', methods=['GET'])
+def index_users():
+    users = db.session.query(User).all()
+    return render_template('main/users.html', user_res=users)
+
+
+@main.route('/books', methods=['GET'])
+def index_books():
+    books_res = db.session.query(Books).all()
+    return render_template('main/books.html', books_res=books_res)

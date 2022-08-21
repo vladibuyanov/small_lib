@@ -19,7 +19,7 @@
     <form method="post">
         {{ form.hidden_tag() }}
         <body class="text-center" id="login_main">
-        <main class="form-signin" style="margin: 10% 10%;">
+        <main class="form-signin" style="margin: 1% 10%;">
             <div class="form-floating" style="margin-bottom: 2%;">
                 {{ form.email }}
                 <label>{{ form.email.label }}</label>
@@ -29,7 +29,12 @@
                 <label>{{ form.psw.label }}</label>
             </div>
             {{ form.submit() }}
-            <p class="mt-5 mb-3 text-muted">© 2022</p>
+            <div>
+                <p class="mt-5 text-muted">
+                    <a href="/registration">New account</a>
+                </p>
+                <p class="mt-5 mb-3 text-muted">© 2022</p>
+            </div>
         </main>
         </body>
     </form>

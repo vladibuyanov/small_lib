@@ -9,3 +9,6 @@ selenium~=4.3.0
 pytest~=7.1.2
 Flask-WTF~=1.0.1
 email-validator~=1.2.1
+WTForms~=3.0.1
+alembic~=1.8.1
+SQLAlchemy~=1.4.39

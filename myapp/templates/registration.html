@@ -18,29 +18,29 @@
         <h1 class="h3 mb-3 fw-normal">Registration</h1>
     </div>
     <form method="post">
-        <div style="padding: 0 0 12px 0;">
+        <div style="margin: 0% 2%;">
             {{ form.hidden_tag() }}
-            <body class="text-center" id="login_main">
-            <main class="form-signin" style="margin: 10% 10%;">
-                <div class="form-floating" style="margin-bottom: 2%;">
-                    {{ form.name }}
-                    <label>{{ form.name.label }}</label>
-                </div>
-                <div class="form-floating" style="margin-bottom: 2%;">
-                    {{ form.email }}
-                    <label>{{ form.email.label }}</label>
-                </div>
-                <div class="form-floating" style="margin-bottom: 2%;">
-                    {{ form.psw }}
-                    <label>{{ form.psw.label }}</label>
-                </div>
-                <div class="form-floating" style="margin-bottom: 2%;">
-                    {{ form.psw_2() }}
-                    <label>{{ form.psw_2.label }}</label>
-                </div>
-                {{ form.submit }}
-            </main>
-            </body>
+            <div class="text-center" id="login_main">
+                <main class="form-signin" style="margin: 1% 10%;">
+                    <div class="form-floating" style="margin-bottom: 2%;">
+                        {{ form.name }}
+                        <label>{{ form.name.label }}</label>
+                    </div>
+                    <div class="form-floating" style="margin-bottom: 2%;">
+                        {{ form.email }}
+                        <label>{{ form.email.label }}</label>
+                    </div>
+                    <div class="form-floating" style="margin-bottom: 2%;">
+                        {{ form.psw }}
+                        <label>{{ form.psw.label }}</label>
+                    </div>
+                    <div class="form-floating" style="margin-bottom: 2%;">
+                        {{ form.psw_2() }}
+                        <label>{{ form.psw_2.label }}</label>
+                    </div>
+                    {{ form.submit }}
+                </main>
+            </div>
         </div>
     </form>
 </div>

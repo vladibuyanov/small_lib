@@ -11,7 +11,7 @@ book = Blueprint('book', __name__)
 def book_add():
     if request.method == 'POST':
         book_from_page = Books(
-            book=request.form['book'],
+            title=request.form['book'],
             author=request.form['author'],
             year_of_publication=request.form['year_of_publication'],
             about=request.form['about'],
@@ -35,8 +35,8 @@ def book_add():
 def change_info(book_page_id):
     book_for_change = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
-        if request.form['book']:
-            book_for_change.book = request.form['book']
+        if request.form['title']:
+            book_for_change.title = request.form['title']
         if request.form['year_of_publication']:
             book_for_change.year_of_publication = request.form['year_of_publication']
         if request.form['author']:

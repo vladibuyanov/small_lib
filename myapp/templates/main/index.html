@@ -15,7 +15,7 @@
     </div>
 
     <div class="sections">
-        <h4>Sections</h4>
+        <h4 style="margin: 0 0 4% 0;">Sections</h4>
         <div class="section">
             <div class="user-card">
                 <h4>Users</h4>
@@ -29,16 +29,16 @@
                 <!--                {% endfor %}-->
                 <!--            </div>-->
                 {% endfor %}
-                <button class="btn">See all users</button>
+                <button class="btn"><a href="/users" class="a-buttons">See all users</a></button>
             </div>
-            <div>
+            <div class="user-card">
                 <h4>Books</h4>
                 {% for book in books_res %}
-                <p>{{ book.book }}<p>
+                <p>{{ book.title }}</p>
                 {% endfor %}
-                <button class="btn">See all books</button>
+                <button class="btn"><a href="/books" class="a-buttons">See all books</a></button>
             </div>
-            <div>
+            <div class="user-card">
                 <h4>Genre</h4>
                 <p> Сlassical literature </p>
                 <p> Historical novel </p>

@@ -40,7 +40,12 @@ def settings(user_id):
             if request.form['settings_email']:
                 user_settings.email = request.form['settings_email']
             if request.form['settings_password']:
-                user_settings.password = generate_password_hash(request.form['settings_password'], method='sha256')
+                user_settings.password = generate_password_hash(
+                    request.form['settings_password'],
+                    method='sha256'
+                )
+            if request.form['settings_place']:
+                user_settings.place = request.form['settings_place']
             try:
                 db.session.commit()
                 return redirect(url_for('users.page', user_id=user_id))
