@@ -8,9 +8,11 @@ function click_show() {
             let about_book = document.querySelectorAll('[id=about_book]');
             if (about_book[number].style.display == 'none') {
               about_book[number].style.display = "block";
+              sm_btn[i].innerHTML = '<- Close';
             }
             else {
                 about_book[number].style.display = "none";
+                sm_btn[i].innerHTML = 'Show more ->';
             }
         });
     }
