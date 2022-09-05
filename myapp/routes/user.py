@@ -9,11 +9,9 @@ users = Blueprint('users', __name__)
 
 @users.route('/user/<int:user_id>')
 def page(user_id):
-    # Take all user for dynamic page and all books of user from page
     all_user_dp = db.session.query(User).all()
     user_books = Books.query.filter_by(owner=user_id).all()
 
-    # Books that user took
     took_book = []
     all_user_books = Books.query.filter_by(user_id=user_id).all()
     for book in all_user_books:

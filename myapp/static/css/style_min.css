@@ -1,0 +1,17 @@
+@media screen and (max-width: 760px) {
+    .nav-title {
+        margin-left: 3%;
+    }
+    .nav-menu {
+        display: none;
+    }
+    .nav-bar {
+        margin-right: 3%;
+    }
+    .section {
+        flex-direction: column;
+    }
+    .user-card {
+        margin-bottom: 5%;
+    }
+}

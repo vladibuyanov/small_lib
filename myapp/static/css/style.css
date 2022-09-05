@@ -7,7 +7,7 @@ a {
 .btn {
     color: white;
     background-color: #404A46;
-    border_color: white;
+    border-color: white;
 }
 .a-buttons {
     text-decoration: none;
@@ -19,17 +19,46 @@ a {
 .btn-outline-primary {
     border-color: #404A46;
 }
-/* Tags */
-.header {
+/* header */
+.navbar {
+    margin: 0 4%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: solid 2px;
+    border-bottom: solid 3px;
 }
+.nav-title {
+    width: 15%;
+    margin-left: 5%;
+}
+.navbar-img {
+    width= 150px;
+    height= 150px;
+}
+.nav-menu {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+}
+.nav-menu-link {
+    margin: 0 3%;
+}
+.nav-bar {
+    width: 15%;
+    margin-right: 5%;
+}
+
+.navbar-href {
+    color: white;
+}
+
 /* Main page */
 .sections {
     margin: 2% 0%;
+}
+.sections-title {
+    margin-bottom: 4%;
 }
 .section {
     margin: 2% 5%;
@@ -40,7 +69,6 @@ a {
 .user-card {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
 }
 .main_text {
     margin: 2% 0%

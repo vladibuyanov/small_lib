@@ -58,7 +58,6 @@ def change_info(book_page_id):
 def give(book_page_id):
     book_for_give = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
-        # Give book to 'user_to_give'
         email_to_give = request.form['give_book_to_email']
         user_to_give = User.query.filter_by(email=email_to_give).first()
         book_for_give.user_id = user_to_give.id
@@ -67,7 +66,6 @@ def give(book_page_id):
             return redirect(url_for('users.page', user_id=current_user.id))
         except Warning:
             db.session.rollback()
-            flash('Something going wrong')
             return render_template('book/give.html')
     return render_template('book/give.html')
 
@@ -75,7 +73,6 @@ def give(book_page_id):
 @book.route('/book/give_back/<int:book_page_id>')
 @login_required
 def give_back(book_page_id):
-    # Search book for giving in Books
     book_for_give_back = Books.query.filter_by(id=book_page_id).first()
     book_for_give_back.user_id = current_user.id
     try:
@@ -84,7 +81,6 @@ def give_back(book_page_id):
         return redirect(url_for('users.page', user_id=current_user.id))
     except Warning:
         db.session.rollback()
-        flash('Something gong wrong')
         return redirect(url_for('users.page', user_id=current_user.id))
 
 

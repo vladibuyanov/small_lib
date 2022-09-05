@@ -15,19 +15,12 @@
     </div>
 
     <div class="sections">
-        <h4 style="margin: 0 0 4% 0;">Sections</h4>
+        <h4 class="sections-title">Sections</h4>
         <div class="section">
             <div class="user-card">
                 <h4>Users</h4>
                 {% for user in user_res %}
                 <p><a href='/user/{{ user.id }}'>{{ user.name }}</a></p>
-                <!--            <div class="user-books">-->
-                <!--                {% for book in books_res %}-->
-                <!--                {% if book.user_id == user.id %}-->
-                <!--                <p>{{ book.book }} ({{book.author}})</p>-->
-                <!--                {% endif %}-->
-                <!--                {% endfor %}-->
-                <!--            </div>-->
                 {% endfor %}
                 <button class="btn"><a href="/users" class="a-buttons">See all users</a></button>
             </div>
