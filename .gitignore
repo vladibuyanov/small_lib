@@ -9,7 +9,7 @@
 /myapp/tests/end-2-end/tests/
 
 # Forms
-/myapp/forms/book_forms.py
+/myapp/core/forms/book_forms.py
 
 # Other
 /TODO.py

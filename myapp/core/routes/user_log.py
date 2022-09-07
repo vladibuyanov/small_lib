@@ -1,15 +1,14 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import check_password_hash
 
-from myapp.models.user import User
-from myapp.forms.user_forms import LoginFrom
+from myapp.core.models.user import User
+from myapp.core.forms.user_forms import LoginFrom
 
 
 user_log = Blueprint('log', __name__)
 
 
-# Login page
 @user_log.route('/login', methods=['GET', 'POST'])
 def user_login():
     if current_user.is_authenticated:
@@ -19,14 +18,9 @@ def user_login():
     if form.validate_on_submit():
         login_email = form.email.data
         whose_login = User.query.filter_by(email=login_email).first()
-        if whose_login:
-            login_psw = form.psw.data
-            if check_password_hash(whose_login.psw, login_psw):
-                login_user(whose_login)
-                return redirect(url_for('main.index'))
-            else:
-                flash('Incorrect password')
-                return render_template('login.html')
+        if whose_login and check_password_hash(whose_login.psw, form.psw.data):
+            login_user(whose_login)
+            return redirect(url_for('main.index'))
         else:
             flash("User not found")
             return render_template('login.html')
