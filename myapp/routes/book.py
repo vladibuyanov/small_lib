@@ -1,21 +1,19 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 
-from myapp import Books, db, User
+from myapp import Book, db, User
 
-book = Blueprint('book', __name__)
+books = Blueprint('books', __name__)
 
 
-@book.route('/book/add', methods=['GET', 'POST'])
+@books.route('/book/add', methods=['GET', 'POST'])
 @login_required
 def book_add():
     if request.method == 'POST':
-        book_from_page = Books(
-            title=request.form['book'],
-            author=request.form['author'],
+        book_from_page = Book(
+            title=request.form['book'], author=request.form['author'],
             year_of_publication=request.form['year_of_publication'],
-            about=request.form['about'],
-            owner=current_user.id,
+            about=request.form['about'], owner=current_user.id,
             user_id=current_user.id
         )
         try:
@@ -30,10 +28,10 @@ def book_add():
         return render_template('book/add.html')
 
 
-@book.route('/book/change_info/<int:book_page_id>', methods=['GET', 'POST'])
+@books.route('/book/change_info/<int:book_page_id>', methods=['GET', 'POST'])
 @login_required
 def change_info(book_page_id):
-    book_for_change = Books.query.filter_by(id=book_page_id).first()
+    book_for_change = Book.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
         if request.form['title']:
             book_for_change.title = request.form['title']
@@ -53,11 +51,11 @@ def change_info(book_page_id):
     return render_template('book/change_info.html', book_for_change=book_for_change)
 
 
-@book.route('/book/give/<int:book_page_id>', methods=['GET', 'POST'])
+@books.route('/book/give/<int:book_page_id>', methods=['GET', 'POST'])
 @login_required
 def give(book_page_id):
-    book_for_give = Books.query.filter_by(id=book_page_id).first()
     if request.method == 'POST':
+        book_for_give = Book.query.filter_by(id=book_page_id).first()
         email_to_give = request.form['give_book_to_email']
         user_to_give = User.query.filter_by(email=email_to_give).first()
         book_for_give.user_id = user_to_give.id
@@ -70,10 +68,10 @@ def give(book_page_id):
     return render_template('book/give.html')
 
 
-@book.route('/book/give_back/<int:book_page_id>')
+@books.route('/book/give_back/<int:book_page_id>')
 @login_required
 def give_back(book_page_id):
-    book_for_give_back = Books.query.filter_by(id=book_page_id).first()
+    book_for_give_back = Book.query.filter_by(id=book_page_id).first()
     book_for_give_back.user_id = current_user.id
     try:
         db.session.commit()
@@ -84,10 +82,10 @@ def give_back(book_page_id):
         return redirect(url_for('users.page', user_id=current_user.id))
 
 
-@book.route('/book/delete/<int:book_page_id>')
+@books.route('/book/delete/<int:book_page_id>')
 @login_required
 def delete_book(book_page_id):
-    book_for_delete = Books.query.filter_by(id=book_page_id).first()
+    book_for_delete = Book.query.filter_by(id=book_page_id).first()
     try:
         db.session.delete(book_for_delete)
         db.session.commit()
