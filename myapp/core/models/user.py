@@ -9,7 +9,7 @@ class User(UserMixin, db.Model):
     psw = db.Column(db.String(50), nullable=True)
     place = db.Column(db.String(32), nullable=True)
 
-    bk = db.relationship('Book', backref='users', uselist=False)
+    books = db.relationship('Book', backref='user', uselist=False)
 
     def __init__(self, name, email, psw, place):
         self.name = name

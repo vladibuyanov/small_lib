@@ -2,15 +2,3 @@
 /.idea
 /venv
 
-# Tests
-/myapp/tests/
-/myapp/tests/end-2-end/.pytest_cache/
-/myapp/tests/end-2-end/conftest.py
-/myapp/tests/end-2-end/tests/
-
-# Forms
-/myapp/core/forms/book_forms.py
-
-# Other
-/TODO.py
-/migrations/

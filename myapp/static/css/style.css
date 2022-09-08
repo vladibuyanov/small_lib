@@ -20,13 +20,15 @@ a {
     border-color: #404A46;
 }
 /* header */
-.navbar {
+header {
     margin: 0 4%;
+    border-bottom: solid 3px;
+}
+.navibar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 3px;
 }
 .nav-title {
     width: 15%;
@@ -47,24 +49,34 @@ a {
 .nav-bar {
     display: flex;
     flex-direction: row;
-    align-items: center
+    align-items: center;
     width: 15%;
     margin-right: 5%;
 }
-
 .navbar-href {
     color: white;
+}
+
+.nav-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2% 0;
+}
+.search-input {
+    width: 80%;
+    margin-right: -6%;
 }
 
 /* Main page */
 .sections {
     margin: 2% 0%;
 }
-.sections-title {
+.section-title {
     margin-bottom: 4%;
 }
 .section {
-    margin: 2% 5%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;

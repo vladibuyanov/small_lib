@@ -12,11 +12,9 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/style_min.css')}}">
 </head>
 <body>
-{% include 'header.html' %}
-<div class="main">
-    {% block content %}{% endblock %}
-</div>
-{% include 'footer.html' %}
+<header>{% include 'base/header.html' %}</header>
+<div class="main">{% block content %}{% endblock %}</div>
+<footer>{% include 'base/footer.html' %}</footer>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
