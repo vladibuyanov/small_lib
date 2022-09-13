@@ -15,4 +15,10 @@
     .user-card {
         margin-bottom: 5%;
     }
+    .lib {
+        flex-direction: column;
+    }
+    .lib-books {
+        margin-top: 2%;
+    }
 }

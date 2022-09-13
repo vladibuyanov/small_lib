@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(260), nullable=True, unique=True)
     psw = db.Column(db.String(50), nullable=True)
     place = db.Column(db.String(32), nullable=True)
+    user_photo = db.Column(db.String(50), default='default.png')
 
     books = db.relationship('Book', backref='user', uselist=False)
 
