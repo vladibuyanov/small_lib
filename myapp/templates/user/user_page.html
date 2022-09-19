@@ -14,8 +14,9 @@
         <div>
             <p>Email: {{ user_res.email}}</p>
             <p>Place: {{ user_res.place }}</p>
-
+            {% if current_user.is_authenticated and current_user.id == user_res.id %}
             <a href="/user/user_settings/{{ current_user.id }}">Settings</a>
+            {% endif %}
         </div>
     </div>
     <div class="lib-books">
