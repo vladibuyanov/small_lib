@@ -1,0 +1,18 @@
+/* Main */
+#main {
+    padding: 2% 5%;
+    margin: 1% 5%;
+    border-radius: 1%;
+    font-family: 'Fredoka', sans-serif;
+}
+#main-info {
+    display: flex;
+    align-items: flex-start;
+}
+#main-info-content {padding-right: 5%;}
+#main-info-content h1 {padding: 5% 0; margin: 0;}
+
+#btn-div {margin-top: 10%;}
+#btn-div a {text-decoration: none; color: #dbe8d4; padding: 2% 5%; margin-right: 5%;}
+
+#main img {width: 45%;}

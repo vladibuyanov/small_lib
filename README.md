@@ -6,3 +6,10 @@ This is a web service that allows you to share books with other users. Exchange,
 - [Python](https://www.python.org/)
 - [Flask](https://flask.palletsprojects.com/en/2.1.x/)
 - [Flask-Sqlalchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
+
+
+## Start App
+
+```commandline
+    python app.py runserver
+```

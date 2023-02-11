@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="main-info">
+    <div id="main-info-content">
+        <h1>Small Lib</h1>
+        <div>
+            <p>
+                With our service, you can expand your personal library and share your books with others,
+                as well as receive new and interesting books in return. No need to buy new books, just
+                exchange with others!
+            </p>
+            <p>
+                In addition, the site will have a convenient search function, allowing you to quickly find
+                the desired book, as well as recommendations based on your reading preferences.
+            </p>
+            <p>
+                Our service is free, safe and easy to use. All you need to do is register, create a profile
+                and start exchanging books with others. Our community is made up of book lovers from all over
+                the world, and you will always find someone who loves to read the same books as you do.
+            </p>
+            <p>
+                Join us and start exchanging books today! Let's create a world where knowledge and literature
+                can be shared freely between people.
+            </p>
+        </div>
+        {% if not current_user.is_authenticated %}
+        <div id="btn-div">
+            <a href="/login" class="btn second-color">Login</a>
+            <a href="/registration" class="btn second-color">Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+    <img src={{url_for('static',filename='img/main-page/bookshelf.png')}} class="navbar-img" alt="bookshelf">
+</div>
+
+<!--<div class="users">-->
+<!--    <div class="sections">-->
+<!--        &lt;!&ndash;        <div class="section">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <h3 class="section-title">Sections</h3>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="section">-->
+<!--            <div class="user-card">-->
+<!--                <h4>Users</h4>-->
+<!--                {% for user in user_res %}-->
+<!--                <p><a href='/user/{{ user.id }}'>{{ user.name }}</a></p>-->
+<!--                {% endfor %}-->
+<!--                <button class="btn"><a href="/users" class="a-buttons">See all users</a></button>-->
+<!--            </div>-->
+<!--            <div class="user-card">-->
+<!--                <h4>Books</h4>-->
+<!--                {% for book in books_res %}-->
+<!--                <p>{{ book.title }}</p>-->
+<!--                {% endfor %}-->
+<!--                <button class="btn"><a href="/books" class="a-buttons">See all books</a></button>-->
+<!--            </div>-->
+<!--            <div class="user-card">-->
+<!--                <h4>Genre</h4>-->
+<!--                <p> Сlassical literature </p>-->
+<!--                <p> Historical novel </p>-->
+<!--                <p> Romantic literature</p>-->
+<!--                <button class="btn">See all genres</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+{% endblock %}

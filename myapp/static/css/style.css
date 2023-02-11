@@ -1,126 +1,25 @@
-/* Links */
-a {
-    text-decoration: none;
-    color: black;
-}
-/* Buttons */
-.btn {
-    color: white;
-    background-color: #404A46;
-    border-color: white;
-    margin-right: 10px;
-}
-.a-buttons {
-    text-decoration: none;
-    color: white;
-}
-.btn-primary {
-    border-color: white;
-}
-.btn-outline-primary {
-    border-color: #404A46;
-}
-/* header */
-header {
-    background: #404A46;
-}
-.navibar {
-    margin: 0 2%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.nav-title {
-    width: 15%;
-    margin-left: 5%;
-}
-.navbar-img {
-    width= 150px;
-    height= 150px;
-}
-.nav-menu {
-    width: 20%;
-    display: flex;
-    flex-direction: row;
-}
-.nav-menu-link {
-    margin: 0 3%;
-    color: white;
-}
-.nav-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 15%;
-    margin-right: 5%;
-}
-.navbar-href {
-    color: white;
-}
-.nav-search {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 2% 0;
-}
-.search-input {
-    width: 80%;
-    margin-right: -6%;
+.font-color {color: #dbe8d4;}
+.main-color {background-color: #0b2824;}
+.second-color {background-color: #234f39;}
+
+body {
+    background-color: #2d3e36;
+    color: #dbe8d4;
 }
 
-/* Main page */
-.sections {
-    margin: 2% 0%;
-}
-.section-title {
-    margin-bottom: 4%;
-}
-.section {
+/* Header */
+header {padding: 2% 8%; display: flex; justify-content: space-between; font-family: 'Lora', serif;}
+header a {text-decoration: none; color: #dbe8d4;}
+#nav-menu {width: 60%; display: flex; align-items: center; justify-content: space-around;}
+#nav-menu a {}
+.btn {padding: 3%; border-radius: 10%;}
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.user-card {
+/* Footer */
+footer {
+    padding: 2% 5%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-.main_text {
-    margin: 2% 0%
-}
-.users {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-}
-.user-books{
-    margin: 2% 0;
-}
-/* Pages */
-.pages-main{
-    margin: 0 8%;
-}
-.input{
-    margin: 2% 0;
-    display: flex;
-    flex-direction: column;
-}
-/* Registration page */
-.registration {
-    margin: 10% 10%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-.user-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center
-}
-/* Errors */
-.flash {
-    margin: 3% 2% 1% 2%;
-    display: flex;
-    justify-content: center;
-}
+footer div {width: 100%; display: flex; justify-content: space-around; margin-bottom: 2%;}
+footer div a {text-decoration: none;}

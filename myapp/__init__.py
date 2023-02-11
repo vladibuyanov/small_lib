@@ -13,13 +13,12 @@ from myapp.core.admin.main import DashBoardView, MyModelView
 from myapp.core.routes.main import main
 from myapp.core.routes.user import users
 from myapp.core.routes.book import books
-from myapp.core.routes.user_log import user_log
-from myapp.core.routes.user_registration import user_registration
+from myapp.core.routes.auth import auth
 
 
-def create_app():
+def create_app(config_file_path):
     app = Flask(__name__)
-    app.config.from_pyfile('config.py')
+    app.config.from_pyfile(config_file_path)
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
     login_manager = LoginManager(app, db)
@@ -37,8 +36,7 @@ def create_app():
     # Routes
     app.register_blueprint(main)
     app.register_blueprint(users)
-    app.register_blueprint(user_log)
-    app.register_blueprint(user_registration)
+    app.register_blueprint(auth)
     app.register_blueprint(books)
 
     return app
