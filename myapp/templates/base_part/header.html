@@ -5,21 +5,21 @@
     <a href="/users">Users</a>
     <a href="/books">Books</a>
     <a href="#">Genre</a>
-    <div>
-        {% if not current_user.is_authenticated %}
-        <a href="/login" class="btn second-color">Login</a>
-        <a href="/registration" class="btn second-color">Sign-up</a>
-        {% else %}
-        <div class="dropdown">
-            <button class="btn" type="button" id="dropdown">Menu</button>
-            <ul class="dropdown-menu" aria-labelledby="dropdown">
-                <li><a class="dropdown-item" href="/user/{{ current_user.id }}">My lib</a></li>
-                <li><a class="dropdown-item" href="/book/add">Add book</a></li>
-                <li><a class="dropdown-item" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
-                <li><a class="dropdown-item" href="/logout" id="logout_btn">Logout</a></li>
+    {% if not current_user.is_authenticated %}
+        <div id="login-div">
+            <a href="/login" class="btn second-color">Login</a>
+            <a href="/registration" class="btn second-color">Sign-up</a>
+        </div>
+    {% else %}
+        <div id="dropdown">
+            <button class="btn font-color main-color" id="dropdown-btn">Menu</button>
+            <ul class="dropdown-menu second-color">
+                <li><a class="dropdown-item font-color" href="/user/{{ current_user.id }}">My lib</a></li>
+                <li><a class="dropdown-item font-color" href="/book/add">Add book</a></li>
+                <li><a class="dropdown-item font-color" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
+                <li><a class="dropdown-item font-color" href="/logout" id="logout_btn">Logout</a></li>
             </ul>
         </div>
-        {% endif %}
-    </div>
+    {% endif %}
 </div>
 

@@ -14,6 +14,34 @@ header a {text-decoration: none; color: #dbe8d4;}
 #nav-menu a {}
 .btn {padding: 3%; border-radius: 10%;}
 
+/* Auth */
+#login-div {width: 25%;}
+
+#dropdown-btn {
+    font-family: 'Lora';
+    padding: 20% 50%;
+    border: 1px solid;
+    border-color: #dbe8d4;;
+}
+.dropdown-menu {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-menu.show {display: block;}
+
+.dropdown-item {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-item:hover {background-color: #0b2824;}
+
+
 /* Footer */
 footer {
     padding: 2% 5%;
@@ -23,3 +51,35 @@ footer {
 }
 footer div {width: 100%; display: flex; justify-content: space-around; margin-bottom: 2%;}
 footer div a {text-decoration: none;}
+
+
+/* Login and Registration */
+#login {
+    font-family: 'Fredoka', sans-serif;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#login a {text-decoration: none;}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+form input {margin-top: 5%;}
+.form-floating {
+    margin-bottom: 3%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#login-footer {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#login-footer a {text-decoration: none;}
+

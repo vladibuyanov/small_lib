@@ -1,6 +1,6 @@
 /* Main */
 #main {
-    padding: 2% 5%;
+    padding: 3% 5%;
     margin: 1% 5%;
     border-radius: 1%;
     font-family: 'Fredoka', sans-serif;
@@ -15,4 +15,4 @@
 #btn-div {margin-top: 10%;}
 #btn-div a {text-decoration: none; color: #dbe8d4; padding: 2% 5%; margin-right: 5%;}
 
-#main img {width: 45%;}
+#bookshelf {width: 45%;}

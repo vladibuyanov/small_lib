@@ -7,13 +7,14 @@ books = Blueprint('books', __name__)
 
 methods = ['GET', 'POST']
 base_url = '/book'
+
 template_folder = 'pages/book'
 
 
 @books.route(f'{base_url}/add', methods=methods)
 @login_required
 def book_add():
-    template = 'book/add.html'
+    template = f'{template_folder}/add.html'
 
     if request.method == 'GET':
         return render_template(template)
@@ -39,7 +40,7 @@ def book_add():
 @books.route(f'{base_url}/change_info/<int:book_page_id>', methods=methods)
 @login_required
 def change_info(book_page_id):
-    template = 'book/change_info.html'
+    template = f'{template_folder}/change_info.html'
     book_for_change = Book.query.filter_by(id=book_page_id).first()
 
     if request.method == 'GET':
@@ -65,7 +66,7 @@ def change_info(book_page_id):
 @books.route(f'{base_url}/give/<int:book_page_id>', methods=methods)
 @login_required
 def give(book_page_id):
-    template = 'book/give.html'
+    template = f'{template_folder}/give.html'
 
     if request.method == 'GET':
         return render_template(template)

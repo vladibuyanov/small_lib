@@ -3,82 +3,75 @@
 {% block content %}
 
 {% if current_user.id == user.id %}
-<h3>My book's</h3>
-{% else %}
-<h3>{{ user.name }}</h3>
-{% endif %}
-
-<div class="lib">
-    <div class="lib-profile">
-        <img src="/static/img/users-photo/{{ user.user_photo }}"
-             alt="user-img" class="user-img">
-        <div>
-            <p>Email: {{ user.email}}</p>
-            <p>Place: {{ user.place }}</p>
-            {% if current_user.is_authenticated and current_user.id == user.id %}
-            <a href="/user/user_settings/{{ current_user.id }}">Settings</a>
-            {% endif %}
+<div id="user-page">
+    <h1>My book's</h1>
+    {% else %}
+    <h1>{{ user.name }}</h1>
+    {% endif %}
+    <div id="lib">
+        <div id="lib-profile">
+            <img src="/static/img/users-photo/{{ user.user_photo }}" alt="user-img">
+            <div>
+                <p>Email: {{ user.email}}</p>
+                <p>Place: {{ user.place }}</p>
+                {% if current_user.is_authenticated and current_user.id == user.id %}
+                <a href="/user/user_settings/{{ current_user.id }}" class="font-color">Settings</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <div class="lib-books">
-        <div id='books' class="books">
-            {% for user_book in user_books %}
-            <div class="book">
-                <div class="book-card">
-                    <div class="books-text">
-                        <h4>{{ user_book.title }} ({{ user_book.author }})</h4>
-                        <div>
-                            {% if user_book.owner == user_book.user_id %}
-                            <p>Status: in home</p>
-                            {% else %}
-                            <p>Status: loan to {{ users[user_book.user_id - 1].name }}</p>
+        <div id="lib-books">
+            <div id='book-list' class="books">
+                <h2>My books</h2>
+                <div id="books-card">
+                    {% for user_book in user_books %}
+                    <div class="book-card">
+                        <div class="books-text">
+                            <h4>{{ user_book.title }} ({{ user_book.author }})</h4>
+                            <div>
+                                {% if user_book.owner == user_book.user_id %}
+                                <p>Status: in home</p>
+                                {% else %}
+                                <p>Status: loan to {{ users[user_book.user_id - 1].name }}</p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <p>Year of publication: {{ user_book.year_of_publication }}</p>
+                                <p id="about_book" style="display: none;">{{ user_book.about }}</p>
+                                <p id="show_more_btn">Show more -></p>
+                            </div>
+                        </div>
+                        <div class="book-buttons">
+                            {% if current_user.is_authenticated and current_user.id == user.id %}
+                                {% if user_book.owner == user_book.user_id %}
+                                <a href="/book/give/{{ user_book.id }}" class="font-color second-color">Give</a>
+                                {% else %}
+                                <a href="/book/give_back/{{ user_book.id }}" class="font-color second-color">Give back</a>
+                                {% endif %}
+                            <a href="/book/change_info/{{ user_book.id }}" class="font-color second-color">Change</a>
+                            <a href="/book/delete/{{ user_book.id }}" class="font-color second-color">Delete</a>
                             {% endif %}
                         </div>
-                        <div>
-                            <p>Year of publication: {{ user_book.year_of_publication }}</p>
-                            <p id="about_book" style="display: none;">{{ user_book.about }}</p>
-                            <p id="show_more_btn">Show more -></p>
-                        </div>
                     </div>
-                    <p class="book-buttons">
-                        {% if current_user.is_authenticated and current_user.id == user.id %}
-                        {% if user_book.owner == user_book.user_id %}
-                        <button class="btn">
-                            <a href="/book/give/{{ user_book.id }}" class="a-buttons">Give</a>
-                        </button>
-                        {% else %}
-                        <button class="btn">
-                            <a href="/book/give_back/{{ user_book.id }}" class="a-buttons">Give back</a>
-                        </button>
-                        {% endif %}
-                        <button class="btn">
-                            <a href="/book/change_info/{{ user_book.id }}" class="a-buttons">Change</a>
-                        </button>
-                        <button class="btn">
-                            <a href="/book/delete/{{ user_book.id }}" class="a-buttons">Delete</a>
-                        </button>
-                        {% endif %}
-                    </p>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <div id="took-books">
-            {% if borrowed_books %}
-            <div><h3 style="margin: 2% 12%;">Took to read</h3></div>
-            <div style="margin: 0 12%;">
-                {% for book in borrowed_books %}
-                <h4>{{ book.book }}</h4>
-                <p>Author: {{ book.author }}</p>
-                <p>Year of publication: {{ book.year_of_publication }}</p>
-                <p>About: {{ book.about }}</p>
-                {% endfor %}
+
+            <div id="took-books">
+                {% if borrowed_books %}
+                <h2>Took books</h2>
+                <div style="margin: 0 12%;">
+                    {% for book in borrowed_books %}
+                    <h4>{{ book.book }}</h4>
+                    <p>Author: {{ book.author }}</p>
+                    <p>Year of publication: {{ book.year_of_publication }}</p>
+                    <p>About: {{ book.about }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
-
 
 <script src="../static/js/show_more.js"></script>
 {% endblock %}
