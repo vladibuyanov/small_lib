@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from myapp import Book, db, User
 
@@ -13,6 +13,23 @@ def index():
     books = db.session.query(Book).all()[:3]
 
     return render_template(template, user_res=users, books_res=books)
+
+
+@main.route('/search', methods=['GET', 'POST'])
+def search():
+    template = f'{template_folder}/search.html'
+    if request.method == 'POST':
+        searched = request.form.get('search')
+
+        is_book = Book.query.filter_by(title=searched).first()
+        is_user = User.query.filter_by(name=searched).first()
+
+        if is_book:
+            return render_template(template, book=is_book)
+        elif is_user:
+            return render_template(template, user=is_user)
+        else:
+            return render_template(template)
 
 
 @main.route('/users', methods=['GET'])

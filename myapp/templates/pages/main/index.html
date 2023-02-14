@@ -26,12 +26,25 @@
         </div>
         {% if not current_user.is_authenticated %}
         <div id="btn-div">
-            <a href="/login" class="btn second-color">Login</a>
-            <a href="/registration" class="btn second-color">Sign Up</a>
+            <a href="/login" class="second-color">Login</a>
+            <a href="/registration" class="second-color">Sign Up</a>
         </div>
         {% endif %}
     </div>
     <img src={{url_for('static',filename='img/main-page/bookshelf.png')}} id="bookshelf" alt="bookshelf">
+</div>
+<div class="book-card">
+    <h2>Books</h2>
+    {% for book in books_res %}
+    <div>
+        <div style="display: flex;">
+            <h3 style="margin-right: 5%;">{{ book.title }}</h3>
+            <h3>{{ book.author }}</h3>
+        </div>
+        <p>{{ book.about }}</p>
+    </div>
+    {% endfor %}
+    <button class="btn"><a href="/books" class="a-buttons">See all books</a></button>
 </div>
 
 <!--<div class="users">-->
@@ -47,13 +60,7 @@
 <!--                {% endfor %}-->
 <!--                <button class="btn"><a href="/users" class="a-buttons">See all users</a></button>-->
 <!--            </div>-->
-<!--            <div class="user-card">-->
-<!--                <h4>Books</h4>-->
-<!--                {% for book in books_res %}-->
-<!--                <p>{{ book.title }}</p>-->
-<!--                {% endfor %}-->
-<!--                <button class="btn"><a href="/books" class="a-buttons">See all books</a></button>-->
-<!--            </div>-->
+
 <!--            <div class="user-card">-->
 <!--                <h4>Genre</h4>-->
 <!--                <p> Сlassical literature </p>-->

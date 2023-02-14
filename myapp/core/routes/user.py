@@ -28,8 +28,8 @@ def page(user_id):
 @login_required
 def settings(user_id):
     template = 'pages/user/user_settings.html'
-
     redirect_page = 'main.index'
+
     user = User.query.filter_by(id=user_id).first()
 
     if current_user.id != user_id:

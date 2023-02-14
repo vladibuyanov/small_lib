@@ -1,42 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="pages-main">
-    <h4>Settings</h4>
-        <div>
+<div class="settings">
+    <h1>Settings</h1>
+    <div id="settings-content">
+        <div id="settings-old">
             <p>Name: {{ user_settings.name }}</p>
             <p>Email: {{ user_settings.email }}</p>
             <p>Place: {{ user_settings.place }}</p>
-            <button id="change_info_btn" class="btn">Change info</button>
+            <button id="change_info_btn" class="second-color font-color btn">Change info</button>
         </div>
-
-    <div id="change_block" style="display: none;">
-        <form method="post">
-            <div class="input">
-                <label for="name">Change name</label>
+        <form method="post" id="change_block">
+            <div class="change-field">
+                <label for="name">Name</label>
                 <input type="text" name="settings_name" id="name" placeholder={{ user_settings.name }}>
             </div>
-            <div class="input">
-                <label for="email">Change Email</label>
+            <div class="change-field">
+                <label for="email">Email</label>
                 <input type="email" name="settings_email" id="email" placeholder={{ user_settings.email }}>
             </div>
-            <div class="input">
-                <label for="password">Change password</label>
+            <div class="change-field">
+                <label for="password">Password</label>
                 <input type="password" name="settings_password" id="password" placeholder="New password">
             </div>
-            <div class="input">
-                <label for="place">Change place</label>
+            <div class="change-field">
+                <label for="place">Place</label>
                 <input type="text" name="settings_place" id="place" placeholder={{ user_settings.place }}>
             </div>
-            <div>
-                {% for msg in get_flashed_messages(True) %}
-                <div class="flash">{{ msg[1] }}</div>
-                {% endfor %}
+            {% for msg in get_flashed_messages(True) %}
+            <div class="flash">{{ msg[1] }}</div>
+            {% endfor %}
+            <div id="change-btns">
+                <button type="submit" class="second-color font-color btn">Submit</button>
+                <a href="/user/user_settings/delete/{{ current_user.id }}" class="second-color font-color">Delete account</a>
             </div>
-            <button type="submit" class="btn">Submit</button>
-            <button type="submit" class="btn">
-                <a href="/user/user_settings/delete/{{ current_user.id }}" style="color: white">Delete account</a>
-            </button>
         </form>
     </div>
 </div>

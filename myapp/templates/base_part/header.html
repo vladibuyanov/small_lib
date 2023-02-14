@@ -2,20 +2,20 @@
 
 <a href="/"><h1>Small Library</h1></a>
 <div id="nav-menu" class="font-color">
-    <a href="/users">Users</a>
-    <a href="/books">Books</a>
-    <a href="#">Genre</a>
+    <form action="/search" method="post" id="search">
+        <input type="text" name="search" placeholder="Search">
+        <button type="submit" class="btn font-color main-color">Search</button>
+    </form>
     {% if not current_user.is_authenticated %}
-        <div id="login-div">
+    <div id="login-div">
             <a href="/login" class="btn second-color">Login</a>
             <a href="/registration" class="btn second-color">Sign-up</a>
         </div>
     {% else %}
-        <div id="dropdown">
+    <div id="dropdown">
             <button class="btn font-color main-color" id="dropdown-btn">Menu</button>
             <ul class="dropdown-menu second-color">
                 <li><a class="dropdown-item font-color" href="/user/{{ current_user.id }}">My lib</a></li>
-                <li><a class="dropdown-item font-color" href="/book/add">Add book</a></li>
                 <li><a class="dropdown-item font-color" href="/user/user_settings/{{ current_user.id }}">Settings</a></li>
                 <li><a class="dropdown-item font-color" href="/logout" id="logout_btn">Logout</a></li>
             </ul>

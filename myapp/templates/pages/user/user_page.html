@@ -4,10 +4,21 @@
 
 {% if current_user.id == user.id %}
 <div id="user-page">
-    <h1>My book's</h1>
-    {% else %}
-    <h1>{{ user.name }}</h1>
-    {% endif %}
+    <div id="user-header">
+        <h1>My book's</h1>
+        {% else %}
+        <h1>{{ user.name }}</h1>
+        {% endif %}
+        <div>
+            <a href="/book/add">
+                <svg viewBox="0 0 100 100" id="plus-icon">
+                    <rect x="25" y="45" width="50" height="10"/>
+                    <rect x="45" y="25" width="10" height="50"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
     <div id="lib">
         <div id="lib-profile">
             <img src="/static/img/users-photo/{{ user.user_photo }}" alt="user-img">
@@ -42,11 +53,11 @@
                         </div>
                         <div class="book-buttons">
                             {% if current_user.is_authenticated and current_user.id == user.id %}
-                                {% if user_book.owner == user_book.user_id %}
-                                <a href="/book/give/{{ user_book.id }}" class="font-color second-color">Give</a>
-                                {% else %}
-                                <a href="/book/give_back/{{ user_book.id }}" class="font-color second-color">Give back</a>
-                                {% endif %}
+                            {% if user_book.owner == user_book.user_id %}
+                            <a href="/book/give/{{ user_book.id }}" class="font-color second-color">Give</a>
+                            {% else %}
+                            <a href="/book/give_back/{{ user_book.id }}" class="font-color second-color">Give back</a>
+                            {% endif %}
                             <a href="/book/change_info/{{ user_book.id }}" class="font-color second-color">Change</a>
                             <a href="/book/delete/{{ user_book.id }}" class="font-color second-color">Delete</a>
                             {% endif %}

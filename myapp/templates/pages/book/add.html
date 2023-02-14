@@ -1,30 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <div class="pages-main">
-        <h4>Add book</h4>
-       <form method="post">
-           <div class="input">
-                    <label for="book">Book</label>
-                    <input required type="text" name="book" id="book">
-                </div>
-                <div class="input">
-                    <label for="author">Author</label>
-                    <input required type="text" name="author" id="author">
-                </div>
-                <div class="input">
-                    <label for="year_of_publication">Year of publication</label>
-                    <input type="text" name="year_of_publication" id="year_of_publication">
-                </div>
-                <div class="input">
-                    <label for="about">About</label>
-                    <textarea type="text" name="about" id="about" autofocus></textarea>
-                </div>
-                {% for msg in get_flashed_messages(True) %}
-                    <div class="flash">{{ msg[1] }}
-                {% endfor %}
-                <button class="btn" type="submit">Add</button>
-           </div>
-       </form>
-    </div>
+<div class="pages-main">
+    <h1>Add book</h1>
+    <form method="post" id="book-form">
+        <div id="book-and-author">
+            <div class="book-input">
+                <label for="book">Book</label>
+                <input required type="text" name="book" id="book">
+            </div>
+            <div class="book-input">
+                <label for="author">Author</label>
+                <input required type="text" name="author" id="author">
+            </div>
+        </div>
+        <div class="book-input">
+            <label for="year_of_publication">Year of publication</label>
+            <input type="text" name="year_of_publication" id="year_of_publication">
+        </div>
+        <div class="book-input">
+            <label for="about">About</label>
+            <textarea name="about" id="about" rows="8" autofocus></textarea>
+        </div>
+        {% for msg in get_flashed_messages(True) %}
+        <div class="flash">
+            {{ msg[1] }}
+        </div>
+        {% endfor %}
+         <button class="second-color font-color btn" type="submit">Add New Book</button>
+    </form>
+</div>
 {% endblock %}
