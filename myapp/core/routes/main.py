@@ -30,7 +30,7 @@ def search():
             return render_template(template, user=is_user)
         else:
             return render_template(template)
-
+    return render_template(template)
 
 @main.route('/users', methods=['GET'])
 def index_users():

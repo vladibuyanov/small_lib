@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="/search" method="post" id="search">
+            <input type="text" name="search" placeholder="Search">
+            <button type="submit" class="font-color main-color">
+                <img src="{{url_for('static',filename='img/svg/loupe.svg')}}">
+            </button>
+    </form>
+    <h2>Results:</h2>
+    {% if book %}
+        {{ book.title }} | {{ book.author }} || <a href="user/{{ book.owner }}">Ask owner</a>
+    {% elif user %}
+        <a href='/user/{{ user.id }}'>{{ user.name }}</a>
+    {% else %}
+        <p>Nothing</p>
+    {% endif %}
+{% endblock %}

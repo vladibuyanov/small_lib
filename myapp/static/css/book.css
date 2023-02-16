@@ -1,0 +1,8 @@
+#book-and-author {display: flex;}
+.book-input {display: flex; align-items: flex-start;
+    flex-direction: column; padding: 2%;}
+
+.book-input input {margin-top: 1%;}
+.book-input textarea {width: 100%; margin-top: 1%;}
+
+#book-form button {width: 30%; padding: 2%; margin: 2%;}
