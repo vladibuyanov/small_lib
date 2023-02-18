@@ -108,3 +108,6 @@ form input {margin-top: 5%;}
     border: 1px solid white;
 }
 #search button img {width: 10%;}
+
+#results {padding: 2%;}
+#books {display: flex; flex-direction: column;}

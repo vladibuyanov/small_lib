@@ -4,8 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from myapp import db
 from myapp.core.models.user import User
-from myapp.core.forms.user_forms import LoginFrom
-from myapp.core.forms.user_forms import RegisterForm
+from myapp.core.forms.user_forms import LoginFrom, RegisterForm
 
 auth = Blueprint('auth', __name__)
 methods = ['GET', 'POST']

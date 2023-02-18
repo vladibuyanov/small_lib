@@ -1,18 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action="/search" method="post" id="search">
-            <input type="text" name="search" placeholder="Search">
-            <button type="submit" class="font-color main-color">
-                <img src="{{url_for('static',filename='img/svg/loupe.svg')}}">
-            </button>
-    </form>
+<form action="/search" method="post" id="search">
+    {{ data.form.hidden_tag() }}
+    {{ data.form.searched }}
+    {{ data.form.submit }}
+</form>
+
+{% if data.result %}
+<div id="results">
     <h2>Results:</h2>
-    {% if book %}
-        {{ book.title }} | {{ book.author }} || <a href="user/{{ book.owner }}">Ask owner</a>
-    {% elif user %}
-        <a href='/user/{{ user.id }}'>{{ user.name }}</a>
+    {% if books %}
+        <div id="books">
+            <h3>Books</h3>
+            {% for book in books %}
+            <div class="book">
+                {{ book.title }} | {{ book.author }} || <a href="user/{{ book.owner }}">Ask owner</a>
+            </div>
+            {% endfor %}
+        </div>
+    {% elif users %}
+        <div id="users">
+            <h3>Users</h3>
+            {% for user in users %}
+            <div class="user">
+                <a href='/user/{{ user.id }}'>{{ user.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
     {% else %}
         <p>Nothing</p>
     {% endif %}
+</div>
+{% endif %}
 {% endblock %}

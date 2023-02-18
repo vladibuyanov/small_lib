@@ -34,17 +34,18 @@
     <img src={{url_for('static',filename='img/main-page/bookshelf.png')}} id="bookshelf" alt="bookshelf">
 </div>
 <div class="book-card">
-    <h2>Books</h2>
-    {% for book in books_res %}
-    <div>
-        <div style="display: flex;">
-            <h3 style="margin-right: 5%;">{{ book.title }}</h3>
-            <h3>{{ book.author }}</h3>
+    <div style="display: flex; justify-content: space-between; padding: 1% 0; flex-wrap: wrap;">
+        {% for book in books_res %}
+        <div style="width: 30%;">
+            <div>
+                <h2>{{ book.title }}</h2>
+                <h3>{{ book.author }}</h3>
+            </div>
+            <p>{{ book.about }}</p>
         </div>
-        <p>{{ book.about }}</p>
+        {% endfor %}
     </div>
-    {% endfor %}
-    <button class="btn"><a href="/books" class="a-buttons">See all books</a></button>
+    <a href="/books" class="font-color" style="text-decoration: none;">See all books</a>
 </div>
 
 <!--<div class="users">-->
