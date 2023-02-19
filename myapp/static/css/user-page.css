@@ -5,22 +5,17 @@
     align-items: center;
     justify-content: space-between;
 }
-#plus-icon {
-  width: 50px;
-  height: 50px;
-  fill: #dbe8d4;
-}
-
-#lib {display: flex; padding: 1%;}
-
-#lib-profile {width: 40%; padding: 1%;}
-#lib-profile img {width: 55%;}
-#lib-profile a {text-decoration: none;}
+#plus-icon {width: 50px; height: 50px; fill: #dbe8d4;}
 
 
-#lib-books {width: 50%; padding: 1%;}
+#user-lib {display: flex; padding: 1%;}
 
-.book-card {padding: 2%;}
+#user-profile {width: 40%; padding: 1%;}
+#user-profile img {width: 55%;}
+
+#user-books {width: 50%; padding: 1%;}
+#user-my-books { display: flex; flex-direction: column;}
+.user-my-book-card {padding: 1%;}
 
 .book-buttons {display: flex; flex-direction: row;}
-.book-buttons a {text-decoration: none; padding: 2%; margin-right: 4%; width: 20%; text-align: center;}
+.book-buttons a {padding: 2%; margin-right: 4%; }

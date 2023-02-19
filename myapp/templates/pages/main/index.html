@@ -33,10 +33,11 @@
     </div>
     <img src={{url_for('static',filename='img/main-page/bookshelf.png')}} id="bookshelf" alt="bookshelf">
 </div>
-<div class="book-card">
-    <div style="display: flex; justify-content: space-between; padding: 1% 0; flex-wrap: wrap;">
+<div id="main-books">
+    <h1>Books</h1>
+    <div id="main-books-card">
         {% for book in books_res %}
-        <div style="width: 30%;">
+        <div class="main-book-card">
             <div>
                 <h2>{{ book.title }}</h2>
                 <h3>{{ book.author }}</h3>
@@ -45,7 +46,7 @@
         </div>
         {% endfor %}
     </div>
-    <a href="/books" class="font-color" style="text-decoration: none;">See all books</a>
+    <a href="/books">See all books</a>
 </div>
 
 <!--<div class="users">-->

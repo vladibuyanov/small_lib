@@ -8,11 +8,17 @@
 #main-info {
     display: flex;
     align-items: flex-start;
+    margin-bottom: 5%;
 }
 #main-info-content {padding-right: 5%;}
 #main-info-content h1 {padding: 5% 0; margin: 0;}
 
 #btn-div {margin-top: 10%;}
-#btn-div a {text-decoration: none; color: #dbe8d4; padding: 2% 5%; margin-right: 5%;}
+#btn-div a {padding: 2% 5%; margin-right: 5%;}
 
 #bookshelf {width: 45%;}
+
+#main-books a {font-size: 20px;}
+#main-books-card {display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 2%;}
+.main-book-card {width: 25%; border: 1px solid; padding: 3%;}
+.main-book-card h2 {margin: 0;}

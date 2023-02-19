@@ -1,35 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="/search" method="post" id="search">
-    {{ data.form.hidden_tag() }}
-    {{ data.form.searched }}
-    {{ data.form.submit }}
-</form>
+<div>
+    <h1>Looking for something?</h1>
+    <form action="/search" method="post" id="search-form">
+        {{ data.form.hidden_tag() }}
+        {{ data.form.searched }}
+        {{ data.form.submit }}
+    </form>
+</div>
+
 
 {% if data.result %}
 <div id="results">
     <h2>Results:</h2>
     {% if books %}
-        <div id="books">
-            <h3>Books</h3>
-            {% for book in books %}
-            <div class="book">
-                {{ book.title }} | {{ book.author }} || <a href="user/{{ book.owner }}">Ask owner</a>
-            </div>
-            {% endfor %}
+    <div id="books">
+        <h3>Books</h3>
+        {% for book in books %}
+        <div class="book">
+            {{ book.title }} | {{ book.author }} || <a href="user/{{ book.owner }}">Ask owner</a>
         </div>
+        {% endfor %}
+    </div>
     {% elif users %}
-        <div id="users">
-            <h3>Users</h3>
-            {% for user in users %}
-            <div class="user">
-                <a href='/user/{{ user.id }}'>{{ user.name }}</a>
-            </div>
-            {% endfor %}
+    <div id="users">
+        <h3>Users</h3>
+        {% for user in users %}
+        <div class="user">
+            <a href='/user/{{ user.id }}'>{{ user.name }}</a>
         </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <p>Nothing</p>
+    <p>Nothing</p>
     {% endif %}
 </div>
 {% endif %}

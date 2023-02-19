@@ -1,29 +1,29 @@
 {% extends "pages/auth/auth.html" %}
 
 {% block content %}
-<h3 class="">Please Sigup</h3>
-<form method="post">
+<h3 class="font-color">Please Sigup</h3>
+<form method="post" class="auth-form">
     {{ form.hidden_tag() }}
     <div class="form-floating">
-        <label>{{ form.name.label }}</label>
+        <label class="font-color">{{ form.name.label }}</label>
         {{ form.name }}
     </div>
     <div class="form-floating">
-        <label>{{ form.email.label }}</label>
+        <label class="font-color">{{ form.email.label }}</label>
         {{ form.email }}
     </div>
     <div class="form-floating">
-        <label>{{ form.psw.label }}</label>
+        <label class="font-color">{{ form.psw.label }}</label>
         {{ form.psw() }}
     </div>
     <div class="form-floating">
-        <label>{{ form.psw_2.label }}</label>
+        <label class="font-color">{{ form.psw_2.label }}</label>
         {{ form.psw_2() }}
     </div>
     {{ form.submit() }}
 </form>
 <div id="login-footer">
     <a href="/login" class="font-color">Already have account?</a>
-    <p class="">© 2023</p>
+    <p class="font-color">© 2023</p>
 </div>
 {% endblock %}
