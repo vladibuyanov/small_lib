@@ -11,7 +11,7 @@ class LoginFrom(FlaskForm):
                         validators=[DataRequired(), Length(min=4, max=100)],
                         render_kw={'class': "form-control"})
     submit = SubmitField('Login',
-                         render_kw={'class': "w-100 btn btn-lg btn-primary"})
+                         render_kw={'class': "btn main-color font-color"})
 
 
 class RegisterForm(FlaskForm):
@@ -30,5 +30,5 @@ class RegisterForm(FlaskForm):
         ],
         render_kw={'class': "form-control"}
     )
-    submit = SubmitField('Registered', render_kw={'class': "w-100 btn btn-lg btn-primary"})
+    submit = SubmitField('Registered', render_kw={'class': "btn main-color font-color"})
 

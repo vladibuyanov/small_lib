@@ -8,7 +8,7 @@
             <p>Name: {{ user_settings.name }}</p>
             <p>Email: {{ user_settings.email }}</p>
             <p>Place: {{ user_settings.place }}</p>
-            <button id="change_info_btn" class="second-color font-color btn">Change info</button>
+            <button id="change_info_btn" class="main-color font-color btn">Change info</button>
         </div>
         <form method="post" id="change_block">
             <div class="change-field">
@@ -31,8 +31,10 @@
             <div class="flash">{{ msg[1] }}</div>
             {% endfor %}
             <div id="change-btns">
-                <button type="submit" class="second-color font-color btn">Submit</button>
-                <a href="/user/user_settings/delete/{{ current_user.id }}" class="second-color font-color">Delete account</a>
+                <button type="submit" class="main-color font-color btn">Submit</button>
+                <a href="/user/user_settings/delete/{{ current_user.id }}" class="btn main-color font-color">
+                    Delete account
+                </a>
             </div>
         </form>
     </div>

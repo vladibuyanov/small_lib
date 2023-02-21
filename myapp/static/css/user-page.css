@@ -8,14 +8,35 @@
 #plus-icon {width: 50px; height: 50px; fill: #dbe8d4;}
 
 
-#user-lib {display: flex; padding: 1%;}
+#user-lib {flex-direction: column; padding: 1%;}
 
-#user-profile {width: 40%; padding: 1%;}
-#user-profile img {width: 55%;}
+#user-profile {
+    padding: 1%;
+    display: flex;
+    align-items: center;
+}
+#user-profile img {
+    width: 150px;
+    margin-right: 5%;
+}
 
-#user-books {width: 50%; padding: 1%;}
-#user-my-books { display: flex; flex-direction: column;}
-.user-my-book-card {padding: 1%;}
+#user-books {padding: 1%;}
+#user-my-books {display: flex; flex-direction: column;}
+.user-my-book-card {
+    margin-right: 2%;
+    padding: 2%;
+    width: 30%;
+    background-color: #2d3e36;
+    border-radius: 10px;
+}
 
+.books-text {margin-bottom: 25px;}
+.books-text h4 {margin-top: 0;}
 .book-buttons {display: flex; flex-direction: row;}
-.book-buttons a {padding: 2%; margin-right: 4%; }
+.book-buttons a {
+    padding: 2% 10%;
+    margin-right: 4%;
+    border: 1px solid;
+    border-radius: 25px;
+}
+.book-buttons a img {width: 100%;}

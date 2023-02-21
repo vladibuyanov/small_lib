@@ -2,7 +2,22 @@
 .book-input {display: flex; align-items: flex-start;
     flex-direction: column; padding: 2%;}
 
-.book-input input {margin-top: 1%;}
-.book-input textarea {width: 100%; margin-top: 1%;}
+.book-input input {
+    margin-top: 10px;
+    background-color: #0b2824;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: #dbe8d4;
+}
+.book-input textarea {
+    width: 100%;
+    margin-top: 1%;
+    background-color: #0b2824;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: #dbe8d4;
+}
 
-#book-form button {width: 30%; padding: 2%; margin: 2%;}
+#book-form button {width: 30%; padding: 2%; margin: 2%; border-radius: 10px;}

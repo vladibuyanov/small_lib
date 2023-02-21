@@ -2,33 +2,54 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash
 
-from myapp import Book, db, User
+from myapp import db, Book, User, Exchange
 
 users = Blueprint('users', __name__)
 
 methods = ['GET', 'POST']
 base_url = '/user'
+redirect_page = 'main.index'
+template_path = 'pages/user'
 
 
-# TODO: Сократить кол-во запросов к бд
 @users.route(f'{base_url}/<int:user_id>')
 def page(user_id):
-    template = 'pages/user/user_page.html'
+    template = f'{template_path}/user_page.html'
 
     all_users = User.query.all()
-    user = User.query.filter_by(id=user_id).first()
-    user_books = Book.query.filter_by(owner=user_id).all()
-    borrowed_books = Book.query.filter(Book.user_id == user_id, Book.owner != user_id).all()
+    all_books = Book.query.all()
 
-    return render_template(template, users=all_users, user=user,
-                           user_books=user_books, borrowed_books=borrowed_books)
+    user = all_users[user_id - 1]
+    user_books = [book for book in all_books if book.owner == user_id]
+    borrowed_books = [book for book in all_books if book.owner != user_id and book.user_id == user_id]
+
+    return render_template(
+        template, users=all_users, books=all_books,
+        user=user, user_books=user_books, borrowed_books=borrowed_books
+    )
+
+
+@users.route(f'{base_url}/<int:user_id>/exchange_history')
+@login_required
+def exchange_history(user_id):
+    template = f'{template_path}/exchange_history.html'
+
+    all_users = User.query.all()
+    all_books = Book.query.all()
+
+    my_requests = Exchange.query.filter_by(requester_id=user_id)
+    users_requests = Exchange.query.filter_by(user_id=user_id)
+
+    return render_template(
+        template, users=all_users, books=all_books,
+        users_requests=users_requests, my_requests=my_requests, user_id=user_id
+    )
 
 
 @users.route(f'{base_url}/user_settings/<int:user_id>', methods=methods)
 @login_required
 def settings(user_id):
-    template = 'pages/user/user_settings.html'
-    redirect_page = 'main.index'
+    template = f'{template_path}/user_settings.html'
 
     user = User.query.filter_by(id=user_id).first()
 
@@ -61,11 +82,8 @@ def settings(user_id):
 @users.route(f'{base_url}/user_settings/delete/<int:user_id>', methods=methods)
 @login_required
 def delete(user_id):
-    redirect_page = 'main.index'
-
     logout_user()
     delete_user = User.query.filter_by(id=user_id).first()
-
     try:
         db.session.delete(delete_user)
         db.session.commit()

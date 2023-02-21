@@ -1,4 +1,8 @@
 body {background-color: #2d3e36;}
+#main {
+    background: rgb(72,97,76);
+    background: linear-gradient(140deg, rgba(72,97,76,1) 10%, rgba(54,77,63,1) 30%, rgba(36,57,50,1) 70%);
+}
 
 .font-color {color: #dbe8d4;}
 .main-color {background-color: #0b2824;}
@@ -65,6 +69,8 @@ header {
 .auth-form {
     display: flex;
     flex-direction: column;
+    padding: 3%;
+    border-radius: 10px;
 }
 .auth-form input {margin-top: 5%;}
 .form-floating {
@@ -87,7 +93,17 @@ header {
     flex-direction: row;
     justify-content: flex-start;
 }
-#search-form input {margin-right: 2%; font-size: 20px; font-family: 'Lora', sherif; }
+#search-form input {
+    padding: 10px;
+    width: 30%;
+    background-color: #0b2824;
+    border: 1px solid;
+    border-radius: 10px;
+    color: #dbe8d4;
+    margin-right: 2%;
+    font-size: 20px;
+    font-family: 'Lora', sherif;
+}
 
 #books {display: flex; flex-direction: column;}
 

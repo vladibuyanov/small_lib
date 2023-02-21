@@ -24,53 +24,15 @@
                 can be shared freely between people.
             </p>
         </div>
-        {% if not current_user.is_authenticated %}
         <div id="btn-div">
-            <a href="/login" class="second-color">Login</a>
-            <a href="/registration" class="second-color">Sign Up</a>
+            {% if not current_user.is_authenticated %}
+            <a href="/login" class="main-color">Login</a>
+            <a href="/registration" class="main-color">Sign Up</a>
+            {% else %}
+            <a href="/books" class="main-color">See all books</a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
     <img src={{url_for('static',filename='img/main-page/bookshelf.png')}} id="bookshelf" alt="bookshelf">
 </div>
-<div id="main-books">
-    <h1>Books</h1>
-    <div id="main-books-card">
-        {% for book in books_res %}
-        <div class="main-book-card">
-            <div>
-                <h2>{{ book.title }}</h2>
-                <h3>{{ book.author }}</h3>
-            </div>
-            <p>{{ book.about }}</p>
-        </div>
-        {% endfor %}
-    </div>
-    <a href="/books">See all books</a>
-</div>
-
-<!--<div class="users">-->
-<!--    <div class="sections">-->
-<!--        &lt;!&ndash;        <div class="section">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <h3 class="section-title">Sections</h3>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div class="section">-->
-<!--            <div class="user-card">-->
-<!--                <h4>Users</h4>-->
-<!--                {% for user in user_res %}-->
-<!--                <p><a href='/user/{{ user.id }}'>{{ user.name }}</a></p>-->
-<!--                {% endfor %}-->
-<!--                <button class="btn"><a href="/users" class="a-buttons">See all users</a></button>-->
-<!--            </div>-->
-
-<!--            <div class="user-card">-->
-<!--                <h4>Genre</h4>-->
-<!--                <p> Сlassical literature </p>-->
-<!--                <p> Historical novel </p>-->
-<!--                <p> Romantic literature</p>-->
-<!--                <button class="btn">See all genres</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 {% endblock %}

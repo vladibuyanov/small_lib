@@ -2,16 +2,16 @@
 
 {% block content %}
 <div class="container">
-    <h1>Give book</h1>
+    <h1>Give a Book</h1>
     <form method="post" id="book-form">
         <div class="book-input">
-            <label for="give_book_to_email">Write email of you're friend</label>
+            <label for="give_book_to_email">Write email of your friend</label>
             <input type="text" required name="give_book_to_email" id="give_book_to_email" placeholder="Email">
         </div>
-        <button class="btn" type="submit">Give!</button>
-        {% for msg in get_flashed_messages(True) %}
-        <div class="flash">{{ msg[1] }}</div> <br>
-        {% endfor %}
+        <button class="btn main-color font-color" type="submit">Give!</button>
     </form>
+    {% for msg in get_flashed_messages(True) %}
+    <div class="flash">{{ msg[1] }}</div> <br>
+    {% endfor %}
 </div>
 {% endblock %}

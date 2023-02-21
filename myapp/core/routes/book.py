@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-
-from myapp import Book, db, User
+from datetime import datetime
+from myapp import Book, db, User, Exchange
 
 books = Blueprint('books', __name__)
 
@@ -22,10 +22,9 @@ def book_add():
         book_from_page = Book(
             title=request.form['book'],
             author=request.form['author'],
-            year_of_publication=request.form['year_of_publication'],
             about=request.form['about'],
-            owner=current_user.id,
-            user_id=current_user.id
+            year_of_publication=request.form['year_of_publication'],
+            owner=current_user.id
         )
         try:
             db.session.add(book_from_page)
@@ -63,34 +62,51 @@ def change_info(book_page_id):
             return render_template('book/change_info.html', book_for_change=book_for_change)
 
 
-@books.route(f'{base_url}/give/<int:book_page_id>', methods=methods)
+@books.route(f'{base_url}/exchange_request/<int:book_id>', methods=methods)
 @login_required
-def give(book_page_id):
-    template = f'{template_folder}/give.html'
+def exchange_request(book_id):
+    new_exchange = Exchange(
+        user_id=Book.query.get(book_id).owner,
+        book_id=book_id,
+        requester_id=current_user.id,
+        status='pending'
+    )
+    db.session.add(new_exchange)
+    db.session.commit()
 
-    if request.method == 'GET':
-        return render_template(template)
-    else:
-        book_for_give = Book.query.filter_by(id=book_page_id).first()
-        email_to_give = request.form['give_book_to_email']
-        user_to_give = User.query.filter_by(email=email_to_give).first()
-        book_for_give.user_id = user_to_give.id
-        try:
-            db.session.commit()
-            return redirect(url_for('users.page', user_id=current_user.id))
-        except Warning:
-            db.session.rollback()
-            return render_template(template)
+    return redirect(url_for('users.page', user_id=current_user.id))
 
 
-@books.route(f'{base_url}/give_back/<int:book_page_id>')
+@books.route(f'{base_url}/accept_request/<int:exchange_id>', methods=methods)
 @login_required
-def give_back(book_page_id):
-    book_for_give_back = Book.query.filter_by(id=book_page_id).first()
-    book_for_give_back.user_id = current_user.id
+def accept_request_view(exchange_id):
+    accept_request = Exchange.query.get(exchange_id)
+
+    # Change
+    book_for_give = Book.query.get(accept_request.book_id)
+    book_for_give.user_id = accept_request.requester_id
+
+    accept_request.status = 'accepted'
+    accept_request.accepted_date = datetime.today()
+
+    db.session.commit()
+    return redirect(url_for('users.page', user_id=current_user.id))
+
+
+@books.route(f'{base_url}/give_back/<int:book_id>')
+@login_required
+def give_back(book_id):
+    book_give_back = Book.query.get(book_id)
+    book_give_back.user_id = current_user.id
+
+    end_of_exchange = Exchange.query.filter_by(book_id=book_id)
+    end_of_exchange = end_of_exchange.order_by(Exchange.created_date.desc()).first()
+
+    end_of_exchange.status = 'done'
+    end_of_exchange.return_date = datetime.today()
+
     try:
         db.session.commit()
-        flash('Ok')
     except Warning:
         db.session.rollback()
     finally:

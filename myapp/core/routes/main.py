@@ -10,9 +10,9 @@ template_folder = 'pages/main'
 @main.route('/', methods=['GET'])
 def index():
     template = f'{template_folder}/index.html'
-    res = db.session
+    data = db.session
 
-    return render_template(template, user_res=res.query(User)[:3], books_res=res.query(Book)[:3])
+    return render_template(template, user_res=data.query(User)[:3], books_res=data.query(Book)[:3])
 
 
 # TODO: убрать костыль "result"

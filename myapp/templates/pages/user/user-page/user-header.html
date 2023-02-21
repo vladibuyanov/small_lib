@@ -1,0 +1,9 @@
+{% if current_user.id == user.id %}
+<h1>My Library</h1>
+<div style="width: 30%; display: flex; align-items: center;">
+  <a href="/user/{{user.id}}/exchange_history" style="margin-right:5%;">Exchange History</a>
+  <a href="/book/add">Add New Book</a>
+</div>
+{% else %}
+<h1>{{ user.name }}</h1>
+{% endif %}

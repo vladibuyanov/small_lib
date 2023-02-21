@@ -1,0 +1,8 @@
+<img src="/static/img/users-photo/{{ user.user_photo }}" alt="user-img">
+<div>
+  <p style="margin-top: 0;">Email: {{ user.email }}</p>
+  <p>Place: {{ user.place }}</p>
+  {% if current_user.is_authenticated and current_user.id == user.id %}
+  <a href="/user/user_settings/{{ user.id }}" class="font-color">Settings</a>
+  {% endif %}
+</div>

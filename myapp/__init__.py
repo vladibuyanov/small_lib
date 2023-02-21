@@ -7,6 +7,7 @@ from myapp.core.extensions import db, migrate
 from myapp.core.models.book import Book
 from myapp.core.models.user import User
 from myapp.core.models.genre import Genre
+from myapp.core.models.exchange import Exchange
 
 from myapp.core.admin.main import DashBoardView, MyModelView
 
@@ -32,6 +33,7 @@ def create_app(config_file_path):
     admin.add_view(ModelView(User, db.session, name='Users'))
     admin.add_view(MyModelView(Book, db.session, name='Books'))
     admin.add_view(MyModelView(Genre, db.session, name='Genre'))
+    admin.add_view(MyModelView(Exchange, db.session, name='Exchange'))
 
     # Routes
     app.register_blueprint(main)

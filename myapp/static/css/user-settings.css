@@ -6,6 +6,7 @@
     padding: 1%;
     width: 35%;
     display: none;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -20,4 +21,4 @@
 
 #change-btns {margin-top: 5%; display: flex; align-items: center;}
 #change-btns button {margin-right: 5%;}
-#change-btns a {text-decoration: none; padding: 3%;}
+#change-btns a {padding: 3%;}

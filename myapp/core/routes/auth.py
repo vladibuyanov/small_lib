@@ -15,19 +15,23 @@ redirect_url = 'main.index'
 @auth.route('/registration', methods=methods)
 def registration():
     template = f'{template_folder}/registration.html'
+    form = RegisterForm()
 
     if current_user.is_authenticated:
         return redirect(url_for(redirect_url))
 
-    form = RegisterForm()
-    new_user = User.query.filter_by(email=form.email.data).first()
     if form.validate_on_submit():
+        new_user = User.query.filter_by(email=form.email.data).first()
         if not new_user:
             form.psw = generate_password_hash(form.psw.data, method='sha256')
-            add_new_user = User(form.name.data, form.email.data, form.psw, place=None)
+            add_new_user = User(
+                name=form.name.data,
+                email=form.email.data,
+                psw=form.psw,
+                place=None
+            )
 
             db.session.add(add_new_user)
-            db.session.flush()
             db.session.commit()
 
             login_user(add_new_user)
@@ -43,15 +47,13 @@ def user_login():
     template = f'{template_folder}/login.html'
     form = LoginFrom()
 
-    if current_user.is_authenticated:
-        return redirect(url_for(redirect_url))
-
     if request.method == 'GET':
+        if current_user.is_authenticated:
+            return redirect(url_for(redirect_url))
         return render_template(template, form=form)
 
     else:
-        login_email = form.email.data
-        login_email = User.query.filter_by(email=login_email).first()
+        login_email = User.query.filter_by(email=form.email.data).first()
 
         if login_email and check_password_hash(login_email.psw, form.psw.data):
             login_user(login_email)
