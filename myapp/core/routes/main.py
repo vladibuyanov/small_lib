@@ -1,54 +1,37 @@
 from flask import Blueprint, render_template, request
 
-from myapp import Book, db, User
-from myapp.core.forms.search_form import SearchFrom
+from myapp import Book, User
+
+from myapp.core.functions.main import main_func, search_func
 
 main = Blueprint('main', __name__)
 template_folder = 'pages/main'
 
 
 @main.route('/', methods=['GET'])
-def index():
+def main_view():
     template = f'{template_folder}/index.html'
-    data = db.session
-
-    return render_template(template, user_res=data.query(User)[:3], books_res=data.query(Book)[:3])
+    return render_template(template)
 
 
-# TODO: убрать костыль "result"
 @main.route('/search', methods=['GET', 'POST'])
-def search():
+def search_view():
     template = f'{template_folder}/search.html'
-    form = SearchFrom()
-    data = {'form': form, 'result': None}
+    data = search_func(request)
 
     if request.method == 'GET':
         return render_template(template, data=data)
-    if form.validate_on_submit():
-        searched = form.searched.data
-
-        is_books = Book.query.filter(Book.title.like(f'%{searched}%'))
-        is_user = User.query.filter(User.name.like(f'%{searched}%'))
-
-        is_books = is_books.order_by(Book.title).all()
-        is_user = is_user.order_by(User.name).all()
-
-        data['result'] = 1
-
-        return render_template(template, data=data, books=is_books, users=is_user)
+    else:
+        return render_template(template, data=data[0], books=data[1], users=data[2])
 
 
 @main.route('/users', methods=['GET'])
 def index_users():
     template = f'{template_folder}/users.html'
-    users = db.session.query(User).all()
-
-    return render_template(template, user_res=users)
+    return render_template(template, user_res=User.query.all())
 
 
 @main.route('/books', methods=['GET'])
 def index_books():
     template = f'{template_folder}/books.html'
-    books_res = db.session.query(Book).all()
-
-    return render_template(template, books_res=books_res)
+    return render_template(template, books_res=Book.query.all())

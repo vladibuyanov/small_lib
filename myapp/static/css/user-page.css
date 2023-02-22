@@ -20,9 +20,11 @@
     margin-right: 5%;
 }
 
-#user-books {padding: 1%;}
-#user-my-books {display: flex; flex-direction: column;}
-.user-my-book-card {
+#books-profile {padding: 1%;}
+#user-books {display: flex; flex-direction: column;}
+
+.book-cards {display: flex; flex-wrap: wrap;}
+.book-card {
     margin-right: 2%;
     padding: 2%;
     width: 30%;

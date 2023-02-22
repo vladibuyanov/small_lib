@@ -14,13 +14,12 @@ a {color: #dbe8d4; text-decoration: none;}
 /* Header */
 header {
     font-family: 'Lora', serif;
-    padding: 2% 8%;
+    padding: 2% 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#title-logo {width: 50%;}
 #nav-menu {width: 50%; display: flex; align-items: center; justify-content: flex-end;}
 #nav-menu-a {width: 20%; margin-right: 2%; display: flex; justify-content: center;}
 #nav-menu img {width: 70%;}

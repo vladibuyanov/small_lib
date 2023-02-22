@@ -1,0 +1,15 @@
+<div id="borrowed_books">
+  {% if borrowed_books %}
+    <h2>Borrowed Books</h2>
+    <div class="book-cards">
+      {% for book in borrowed_books %}
+      <div class="book-card">
+        <p>{{ book.title }}</p>
+        <h4>{{ book.book }}</h4>
+        <p>Author: {{ book.author }}</p>
+        <p>Year of publication: {{ book.year_of_publication }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

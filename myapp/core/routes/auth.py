@@ -1,70 +1,52 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, request
-from flask_login import login_user, login_required, logout_user, current_user
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask import Blueprint, render_template, redirect, url_for, request
+from flask_login import login_required, current_user
 
-from myapp import db
-from myapp.core.models.user import User
-from myapp.core.forms.user_forms import LoginFrom, RegisterForm
+from myapp.core.functions.auth import user_logout_func, registration_func, user_login_func
 
 auth = Blueprint('auth', __name__)
 methods = ['GET', 'POST']
 template_folder = 'pages/auth'
-redirect_url = 'main.index'
+redirect_url = 'main.main_view'
 
 
 @auth.route('/registration', methods=methods)
-def registration():
+def registration_view():
     template = f'{template_folder}/registration.html'
-    form = RegisterForm()
 
     if current_user.is_authenticated:
         return redirect(url_for(redirect_url))
 
-    if form.validate_on_submit():
-        new_user = User.query.filter_by(email=form.email.data).first()
-        if not new_user:
-            form.psw = generate_password_hash(form.psw.data, method='sha256')
-            add_new_user = User(
-                name=form.name.data,
-                email=form.email.data,
-                psw=form.psw,
-                place=None
-            )
-
-            db.session.add(add_new_user)
-            db.session.commit()
-
-            login_user(add_new_user)
-            return redirect(url_for(redirect_url))
+    if request.method == 'GET':
+        form = registration_func(request)
+        return render_template(template, form=form)
+    else:
+        add_new_user = registration_func(request)
+        if not add_new_user:
+            return redirect(url_for('auth.registration_view'))
         else:
-            flash('User with this email already exist')
-            return render_template(template)
-    return render_template(template, form=form)
+            return redirect(url_for(redirect_url))
 
 
 @auth.route('/login', methods=methods)
-def user_login():
+def user_login_view():
     template = f'{template_folder}/login.html'
-    form = LoginFrom()
+
+    if current_user.is_authenticated:
+        return redirect(url_for(redirect_url))
 
     if request.method == 'GET':
-        if current_user.is_authenticated:
-            return redirect(url_for(redirect_url))
+        form = user_login_func(request)
         return render_template(template, form=form)
-
     else:
-        login_email = User.query.filter_by(email=form.email.data).first()
-
-        if login_email and check_password_hash(login_email.psw, form.psw.data):
-            login_user(login_email)
+        user_login = user_login_func(request)
+        if user_login:
             return redirect(url_for(redirect_url))
         else:
-            flash("User not found")
-            return render_template(template)
+            return redirect(url_for('auth.user_login_view'))
 
 
-@auth.route('/logout', methods=methods)
+@auth.route('/logout', methods=['GET'])
 @login_required
-def user_logout():
-    logout_user()
+def user_logout_view():
+    user_logout_func()
     return redirect(url_for(redirect_url))
