@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 
 from myapp import Book, User
 
-from myapp.core.functions.main import main_func, search_func
+from myapp.core.functions.main import search_func
 
 main = Blueprint('main', __name__)
 template_folder = 'pages/main'
@@ -22,7 +22,7 @@ def search_view():
     if request.method == 'GET':
         return render_template(template, data=data)
     else:
-        return render_template(template, data=data[0], books=data[1], users=data[2])
+        return render_template(template, data=data[0], request=request, books=data[1], users=data[2])
 
 
 @main.route('/users', methods=['GET'])

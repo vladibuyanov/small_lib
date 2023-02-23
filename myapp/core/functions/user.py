@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash
 from flask_login import logout_user
 
+from myapp.core.forms.user_forms import SettingsForm
 from myapp import db, Book, User, Exchange
 
 
@@ -26,20 +27,22 @@ def user_exchange_history_func(user_id):
 
 
 def user_settings_func(request, user_id):
+    form = SettingsForm(user_id)
     user = User.query.get(user_id)
+
     if request.method == 'GET':
-        return user
-    else:
-        if request.form['settings_name']:
-            user.name = request.form['settings_name']
-        if request.form['settings_email']:
-            user.email = request.form['settings_email']
-        if request.form['settings_place']:
-            user.place = request.form['settings_place']
-        if request.form['settings_password']:
+        return user, form
+
+    if request.method == 'POST':
+        if form.name.data:
+            user.name = form.name.data
+        if form.email.data:
+            user.email = form.email.data
+        if form.place.data:
+            user.place = form.place.data
+        if form.psw.data:
             user.password = generate_password_hash(
-                request.form['settings_password'],
-                method='sha256'
+                form.psw.data, method='sha256'
             )
         db.session.commit()
 

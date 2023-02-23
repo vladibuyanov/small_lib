@@ -10,7 +10,7 @@ class DashBoardView(AdminIndexView):
             return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('index'))
+        return redirect(url_for('main.main_view'))
 
     @expose('/')
     def admin_panel(self):

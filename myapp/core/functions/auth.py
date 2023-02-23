@@ -1,7 +1,7 @@
 from flask_login import logout_user, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from myapp.core.forms.user_forms import RegisterForm, LoginFrom
+from myapp.core.forms.auth_forms import RegisterForm, LoginFrom
 from myapp.core.models.user import User, db
 
 

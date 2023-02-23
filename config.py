@@ -6,5 +6,3 @@ DEBUG = os.getenv('DEBUG', True)
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///small-lib.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-

@@ -26,8 +26,9 @@
 .book-cards {display: flex; flex-wrap: wrap;}
 .book-card {
     margin-right: 2%;
+    margin-bottom: 2%;
     padding: 2%;
-    width: 30%;
+    width: 25%;
     background-color: #2d3e36;
     border-radius: 10px;
 }

@@ -41,7 +41,7 @@ def user_settings_view(user_id):
     user = user_settings_func(request, user_id)
 
     if request.method == 'GET':
-        return render_template(template, user_settings=user)
+        return render_template(template, user_settings=user[0], form=user[1])
     else:
         return redirect(url_for(redirect_page, user_id=user_id))
 

@@ -22,7 +22,7 @@
         {% if current_user.is_authenticated %}
           {% if user_book.owner == user_book.user_id %}
             {% if current_user.id == user.id %}
-              <a href="/book/change_info/{{ user_book.id }}" class="font-color main-color">Change Info</a>
+              <a href="/book/change_info/{{ user_book.id }}" class="font-color main-color">Change</a>
               <a href="/book/delete/{{ user_book.id }}" class="font-color main-color">Delete</a>
             {% else %}
               <a href="/book/exchange_request/{{ user_book.id }}" class="font-color main-color">Make a request</a>

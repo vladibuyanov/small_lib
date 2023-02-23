@@ -2,32 +2,28 @@
 
 {% block content %}
 <div class="pages-main">
-    <h1>Add Book</h1>
-    <form method="post" id="book-form">
-        <div id="book-and-author">
-            <div class="book-input">
-                <label for="book">Book</label>
-                <input required type="text" name="book" id="book">
-            </div>
-            <div class="book-input">
-                <label for="author">Author</label>
-                <input required type="text" name="author" id="author">
-            </div>
+<h1>Add Book</h1>
+<form method="post" id="book-form">
+    {{ form.hidden_tag() }}
+    <div id="book-and-author">
+        <div class="book-input">
+            <label class="font-color">{{ form.title.label }}</label>
+            {{ form.title }}
         </div>
         <div class="book-input">
-            <label for="year_of_publication">Year of publication</label>
-            <input type="text" name="year_of_publication" id="year_of_publication">
+            <label class="font-color">{{ form.author.label }}</label>
+            {{ form.author }}
         </div>
-        <div class="book-input">
-            <label for="about">About</label>
-            <textarea name="about" id="about" rows="8" autofocus></textarea>
-        </div>
-        {% for msg in get_flashed_messages(True) %}
-        <div class="flash">
-            {{ msg[1] }}
-        </div>
-        {% endfor %}
-         <button class="main-color font-color btn" type="submit">Add New Book</button>
-    </form>
+    </div>
+    <div class="book-input">
+        <label class="font-color">{{ form.year_of_publication.label }}</label>
+        {{ form.year_of_publication }}
+    </div>
+    <div class="book-input">
+        <label class="font-color">{{ form.about.label }}</label>
+        {{ form.about }}
+    </div>
+    <button class="main-color font-color btn" type="submit">Add New Book</button>
+</form>
 </div>
 {% endblock %}

@@ -1,33 +1,47 @@
 from datetime import datetime
 
 from myapp import db, Book, Exchange
+from myapp.core.forms.book_forms import BookAddForm, BookChangeForm
 
 
 def book_add_func(request, current_user):
-    add_new_book = Book(
-        title=request.form['book'],
-        author=request.form['author'],
-        about=request.form['about'],
-        year_of_publication=request.form['year_of_publication'],
-        owner=current_user.id
-    )
-    db.session.add(add_new_book)
-    db.session.commit()
+    form = BookAddForm()
+
+    if request.method == 'GET':
+        return form
+    else:
+        add_new_book = Book(
+            title=form.title.data,
+            author=form.author.data,
+            year_of_publication=form.year_of_publication.data,
+            about=form.about.data,
+            owner=current_user.id
+        )
+        db.session.add(add_new_book)
+        db.session.commit()
 
 
 def book_change_info_func(request, book_page_id):
-    book_for_change = Book.query.filter_by(id=book_page_id).first()
+    book_for_change = Book.query.get(book_page_id)
+    form = BookChangeForm(book_id=book_page_id)
+
     if request.method == 'GET':
-        return book_for_change
+        return form
+
     else:
-        if request.form['title']:
-            book_for_change.title = request.form['title']
-        if request.form['year_of_publication']:
-            book_for_change.year_of_publication = request.form['year_of_publication']
-        if request.form['author']:
-            book_for_change.author = request.form['author']
-        if request.form['about']:
-            book_for_change.about = request.form['about']
+        title = form.title.data
+        author = form.author.data
+        year_of_publication = form.year_of_publication.data
+        about = form.about.data
+
+        if title:
+            book_for_change.title = title
+        if year_of_publication:
+            book_for_change.year_of_publication = year_of_publication
+        if author:
+            book_for_change.author = author
+        if about:
+            book_for_change.about = about
         db.session.commit()
 
 

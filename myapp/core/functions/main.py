@@ -1,20 +1,18 @@
 from myapp import Book, User
-from myapp.core.forms.search_form import SearchFrom
+from myapp.core.forms.search_forms import SearchForm
 
 
-def main_func():
+def main_func() -> list:
     user_res = User.query.limit(3).all()
     books_res = Book.query.limit(3).all()
     return [user_res, books_res]
 
 
-# TODO: убрать костыль "result"
 def search_func(request):
-    form = SearchFrom()
-    data = {'form': form, 'result': None}
+    form = SearchForm()
 
     if request.method == 'GET':
-        return data
+        return form
 
     if form.validate_on_submit():
         searched = form.searched.data
@@ -25,6 +23,4 @@ def search_func(request):
         is_books = is_books.order_by(Book.title).all()
         is_user = is_user.order_by(User.name).all()
 
-        data['result'] = 1
-
-        return data, is_books, is_user
+        return form, is_books, is_user

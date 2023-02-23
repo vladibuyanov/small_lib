@@ -2,16 +2,16 @@
 
 {% block content %}
 <div>
-    <h1>Looking for something?</h1>
+    <h1>Are you looking for something?</h1>
     <form action="/search" method="post" id="search-form">
-        {{ data.form.hidden_tag() }}
-        {{ data.form.searched }}
-        {{ data.form.submit }}
+        {{ data.hidden_tag() }}
+        {{ data.searched }}
+        {{ data.submit }}
     </form>
 </div>
 
 
-{% if data.result %}
+{% if request.method == 'POST' %}
 <div id="results">
     <h2>Results:</h2>
     {% if books %}

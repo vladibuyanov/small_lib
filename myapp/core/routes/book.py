@@ -17,8 +17,10 @@ template_folder = 'pages/book'
 @login_required
 def book_add_view():
     template = f'{template_folder}/add.html'
+
     if request.method == 'GET':
-        return render_template(template)
+        form = book_add_func(request, current_user)
+        return render_template(template, form=form)
     else:
         book_add_func(request, current_user)
         return redirect(url_for(redirect_page, user_id=current_user.id))
@@ -28,10 +30,12 @@ def book_add_view():
 @login_required
 def book_change_info_view(book_page_id):
     template = f'{template_folder}/change_info.html'
-    data = book_change_info_func(request, book_page_id)
+
     if request.method == 'GET':
-        return render_template(template, book_for_change=data)
+        form = book_change_info_func(request, book_page_id)
+        return render_template(template, form=form)
     else:
+        book_change_info_func(request, book_page_id)
         return redirect(url_for(redirect_page, user_id=current_user.id))
 
 

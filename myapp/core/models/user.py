@@ -12,7 +12,7 @@ class User(UserMixin, db.Model):
     place = db.Column(db.String(32), nullable=True)
     user_photo = db.Column(db.String(50), default='default.png')
 
-    books = db.relationship('Book', backref='user', uselist=False)
+    books = db.relationship('Book', backref='user', uselist=True)
 
     def __init__(self, name, email, psw, place):
         self.name = name
