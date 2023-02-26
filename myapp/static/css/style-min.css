@@ -1,24 +1,23 @@
-@media screen and (max-width: 760px) {
-    .nav-title {
-        margin-left: 3%;
-    }
-    .nav-menu {
-        display: none;
-    }
+@media screen and (max-width: 768px) {
+    .nav-title {margin-left: 3%;}
+    .nav-menu {display: none;}
     .nav-bar {
         width: 200px;
         margin-right: 3%;
     }
-    .section {
-        flex-direction: column;
-    }
-    .user-card {
-        margin-bottom: 5%;
-    }
-    .lib {
-        flex-direction: column;
-    }
-    .lib-books {
-        margin-top: 2%;
-    }
+    .section {flex-direction: column;}
+    .user-card {margin-bottom: 5%;}
+    .lib {flex-direction: column;}
+    .lib-books {margin-top: 2%;}
+
+    /* Main */
+    #main-info {text-align: center;}
+    #bookshelf {display: none;}
+
+    .book-cards {flex-direction: column;}
+    .book-card {width: 100%;}
+
+    /* Search */
+    #main {text-align: center;}
+    #search-form {justify-content: center;}
 }

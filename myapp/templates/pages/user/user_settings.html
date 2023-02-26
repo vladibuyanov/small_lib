@@ -5,12 +5,23 @@
     <h1>Settings</h1>
     <div id="settings-content">
         <div id="settings-old">
-            <p>Name: {{ user_settings.name }}</p>
-            <p>Email: {{ user_settings.email }}</p>
-            <p>Place: {{ user_settings.place }}</p>
+            <div id="settings-name-and-email">
+                <div>
+                    <p>Name</p>
+                    <p>{{ user_settings.name }}</p>
+                </div>
+                <div>
+                    <p>Email</p>
+                    <p>{{ user_settings.email }}</p>
+                </div>
+            </div>
+            <div>
+                <p>Place</p>
+                <p>{{ user_settings.place }}</p>
+            </div>
             <button id="change_info_btn" class="main-color font-color btn">Change info</button>
         </div>
-        <form method="post" id="change_block" class="auth-form font-color main-color">
+        <form method="post" id="change_block" class="auth-form font-color main-color" style="display: none;">
             {{ form.hidden_tag() }}
             <div class="form-floating">
                 <label class="font-color">{{ form.name.label }}</label>
@@ -29,11 +40,9 @@
                 {{ form.place }}
             </div>
             <div id="change-btns">
-                <button type="submit" class="btn main-color font-color">
-                    Submit
-                </button>
+                <button type="submit" class="btn main-color font-color">Submit</button>
                 <a href="/user/user_settings/delete/{{ current_user.id }}" class="btn main-color font-color">
-                    Delete account
+                        Delete account
                 </a>
             </div>
         </form>

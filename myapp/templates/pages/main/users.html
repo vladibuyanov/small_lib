@@ -3,7 +3,7 @@
 {% block content %}
     <div class="sections">
         <div class="user-card">
-            <h4>Users</h4>
+            <h1>Users</h1>
             {% for user in user_res %}
             <p> <a href='/user/{{ user.id }}'>{{ user.name }}</a> </p>
             {% endfor %}

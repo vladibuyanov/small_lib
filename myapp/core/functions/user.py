@@ -5,25 +5,27 @@ from myapp.core.forms.user_forms import SettingsForm
 from myapp import db, Book, User, Exchange
 
 
+def query_to_db_all():
+    return User.query.all(), Book.query.all()
+
+
 def user_page_func(user_id):
-    all_users = User.query.all()
-    all_books = Book.query.all()
+    db_query = query_to_db_all()
 
-    user = all_users[user_id - 1]
-    user_books = [book for book in all_books if book.owner == user_id]
-    borrowed_books = [book for book in all_books if book.owner != user_id and book.user_id == user_id]
+    user = db_query[0][user_id - 1]
+    user_books = [book for book in db_query[1] if book.owner == user_id]
+    borrowed_books = [book for book in db_query[1] if book.owner != user_id and book.user_id == user_id]
 
-    return all_users, user, user_books, borrowed_books
+    return db_query[0], user, user_books, borrowed_books
 
 
 def user_exchange_history_func(user_id):
-    all_users = User.query.all()
-    all_books = Book.query.all()
+    db_query = query_to_db_all()
 
-    my_requests = Exchange.query.filter_by(requester_id=user_id)
-    users_requests = Exchange.query.filter_by(user_id=user_id)
+    my_requests = Exchange.query.filter_by(requester_id=user_id).order_by(Exchange.created_date.desc())
+    users_requests = Exchange.query.filter_by(user_id=user_id).order_by(Exchange.created_date.desc())
 
-    return all_users, all_books, users_requests, my_requests
+    return db_query[0], db_query[1], users_requests, my_requests
 
 
 def user_settings_func(request, user_id):

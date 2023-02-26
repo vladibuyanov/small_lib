@@ -7,30 +7,30 @@
         <h3>My Requests</h3>
         <div>
             {% for request in my_requests %}
-            <div style="background-color: #0b2824; padding: 1%; margin-bottom: 1%;">
-                Request book {{ books[request.book_id - 1].title }}
-                from {{ users[request.user_id - 1].name }}
-                <p>Status {{ request.status }}</p>
-            </div>
+                <div style="background-color: #0b2824; padding: 1%; margin-bottom: 1%;">
+                    Request {{ books[request.book_id - 1].title }}
+                    from {{ users[request.user_id - 1].name }}
+                    <p>Status {{ request.status }}</p>
+                </div>
             {% endfor %}
         </div>
     </div>
     <div>
         <h3>Users Requests</h3>
         {% for users_request in users_requests %}
-        <div style="background-color: #0b2824; padding: 1%; margin-bottom: 1%;">
-            <div>
-                <p>Exchange {{ books[users_request.book_id - 1].title }}</p>
-                <p>To {{ users[users_request.requester_id - 1].name }}</p>
-                <p>Status {{ users_request.status }}</p>
+            <div style="background-color: #0b2824; padding: 1%; margin-bottom: 1%;">
+                <div>
+                    <p>Exchange {{ books[users_request.book_id - 1].title }}</p>
+                    <p>To {{ users[users_request.requester_id - 1].name }}</p>
+                    <p>Status {{ users_request.status }}</p>
+                </div>
+                {% if users_request.status == 'pending' %}
+                    <div>
+                        <a href="/book/accept_request/{{ users_request.id }}">Accept</a>
+                        <a href="/">Delete</a>
+                    </div>
+                {% endif %}
             </div>
-            {% if users_request.status == 'pending' %}
-            <div>
-                <a href="/book/accept_request/{{ users_request.id }}">Accept</a>
-                <a href="/">Delete</a>
-            </div>
-            {% endif %}
-        </div>
         {% endfor %}
     </div>
 </div>

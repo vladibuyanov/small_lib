@@ -34,7 +34,7 @@
 }
 
 .books-text {margin-bottom: 25px;}
-.books-text h4 {margin-top: 0;}
+.books-text h4 {margin-top: 0; height: 20%;}
 .book-buttons {display: flex; flex-direction: row;}
 .book-buttons a {
     padding: 2% 10%;

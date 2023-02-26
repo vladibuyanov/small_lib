@@ -1,6 +1,5 @@
 body {background-color: #2d3e36;}
 #main {
-    background: rgb(72,97,76);
     background: linear-gradient(140deg, rgba(72,97,76,1) 10%, rgba(54,77,63,1) 30%, rgba(36,57,50,1) 70%);
 }
 
@@ -35,11 +34,12 @@ header {
     border-radius: 25px;
 }
 .dropdown-menu {
+    text-align: end;
     list-style-type: none;
     padding: 0;
     display: none;
     position: absolute;
-    min-width: 160px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }

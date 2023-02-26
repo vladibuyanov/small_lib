@@ -1,6 +1,11 @@
-#settings-content {display: flex;}
+#settings-content {}
 
-#settings-old {margin-right: 5%; padding: 1%; display: flex; flex-direction: column;}
+#settings-old {margin-right: 5%; margin-bottom: 5%; padding: 1%; display: flex; flex-direction: column;}
+#settings-old button {padding: 2%; width: 50%;}
+
+#settings-name-and-email {display:flex;}
+#settings-name-and-email div {margin-right: 20px;}
+#settings-name-and-email div p {margin-top: 0;}
 
 #change_block {
     padding: 1%;
@@ -19,6 +24,6 @@
 .change-field label {margin-right: 5%;}
 .change-field input {margin-top: 1%;}
 
-#change-btns {margin-top: 5%; display: flex; align-items: center;}
-#change-btns button {margin-right: 5%;}
-#change-btns a {padding: 3%;}
+#change-btns {margin-top: 5%; display: flex; align-items: center; justify-content: space-around;}
+#change-btns button {width: 40%;}
+#change-btns a {}
